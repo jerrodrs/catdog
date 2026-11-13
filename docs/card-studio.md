@@ -1,5 +1,7 @@
 # Card Studio
 
+Official Scryfall imports offer **Maximum available (PNG preferred)**, **Large JPEG** and **Standard JPEG** image quality. Maximum keeps the native PNG when available and otherwise uses the largest supported scan, without upscaling. The single-card printing picker also has a **Download maximum-quality PNG** button for the selected face. Both faces of a double-faced card can be downloaded separately. Use **Prefer** to select newest, oldest, typical, unusual, promo, cheaper or more expensive printings, or avoid Universes Beyond; choosing a preference switches the picker to Scryfall's preferred printing. **All printings** remains available for browsing. Bulk **Populate MTG art** offers the same quality and preference controls.
+
 In Print settings, **Card faces → Each face as a separate card** places both faces of a double-faced card in consecutive card-sized spaces on ordinary sheets. Print single-sided, cut out each face, and put both pieces in one sleeve. Copies apply to each face; single-faced cards print once per copy. This works for decks, individual saved versions and the print tray, including page ranges and individual-page PDF downloads. Generation and the library still treat a double-faced card as one card with two faces.
 
 Studio is a local deck builder around the existing deterministic renderer. The web interface manages decks and generation jobs; the selected deck provider (Codex or Grok) researches and prepares the art/manifest; Python performs the final composition with the approved fonts and frames.

@@ -359,9 +359,9 @@ export function createStudio(options = {}) {
       }
       if(parts[0]==='api' && parts[1]==='cards' && parts[2]){
         const card=getCard(parts[2]);
-        if(parts[3]==='official-printings'&&req.method==='GET')return send(res,200,await official.catalog(card.id,{page:url.searchParams.get('page')||1,unique:url.searchParams.get('unique')||'prints',language:url.searchParams.get('language')||'en'}));
+        if(parts[3]==='official-printings'&&req.method==='GET')return send(res,200,await official.catalog(card.id,{page:url.searchParams.get('page')||1,unique:url.searchParams.get('unique')||'prints',language:url.searchParams.get('language')||'en',prefer:url.searchParams.get('prefer')||'',treatment:url.searchParams.get('treatment')||'any'}));
         if(parts[3]==='reconstruct'&&req.method==='POST')return send(res,201,await reconstruction.create(card.id,await body(req,45*1024*1024)));
-        if(parts[3]==='official-printing'&&req.method==='POST')return send(res,201,await official.select(card.id,(await body(req)).printing_id));
+        if(parts[3]==='official-printing'&&req.method==='POST'){const data=await body(req);return send(res,201,await official.select(card.id,data.printing_id,{quality:data.quality}));}
         if(parts[3]==='retry-official-import'&&req.method==='POST'){await body(req);return send(res,200,official.retryImport(card.id));}
         if(parts[3]==='use-custom-art'&&req.method==='POST'){await body(req);return send(res,200,official.useCustom(card.id));}
         if(parts[3]==='artwork-sources'&&req.method==='GET')return send(res,200,artworkLibrary.sources(card.id));
@@ -406,7 +406,7 @@ export function createStudio(options = {}) {
         if(!parts[3]&&req.method==='GET'){let saved={};try{saved=JSON.parse(fs.readFileSync(path.join(job.directory,'request.json'),'utf8'));}catch{}return send(res,200,{...job,generation_options:{include_history:saved.include_history!==false,use_reference_images:saved.use_reference_images!==false,isolate_generation:saved.isolate_generation===true}});}
         if(parts[3]==='retry' && req.method==='POST')return send(res,202,{jobs:queue.retry(job.id,await body(req))});
       }
-      if(parts[0]==='official-printing-images'&&parts.length===4&&req.method==='GET')return file(res,await official.image(parts[1],parts[2],parts[3]));
+      if(parts[0]==='official-printing-images'&&parts.length===4&&req.method==='GET')return file(res,await official.image(parts[1],parts[2],parts[3]),url.searchParams.has('download')?`scryfall-${parts[1]}-${parts[2]}.${parts[3]==='png'?'png':'jpg'}`:undefined);
       if(parts[0]==='assets' && parts.length===3 && req.method==='GET'){
         const version=store.get('SELECT * FROM versions WHERE id=?',parts[1]);if(!version)throw new HttpError(404,'Card version not found.');
         const field={image:'image_path',thumb:'image_path',frame:'frame_path',report:'report_path'}[parts[2]];

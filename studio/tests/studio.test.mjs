@@ -678,6 +678,29 @@ with zipfile.ZipFile(sys.argv[1]) as archive:
  const tray=await archive('/api/print/pdf',{});assert.deepEqual(tray.map(p=>p.name),['page-001.pdf','page-002.pdf']);
 });
 
+test('Scryfall picker forwards printing preferences, saves selected quality and downloads native PNGs',async t=>{
+ const {execFileSync}=await import('node:child_process');
+ const bytes=execFileSync('python3',['-c','from PIL import Image;import io,sys;b=io.BytesIO();Image.new("RGB",(745,1040),"green").save(b,format="PNG");sys.stdout.buffer.write(b.getvalue())']);
+ const printingId='aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',oracleId='bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',requests=[];
+ const printing={id:printingId,oracle_id:oracleId,name:'Sol Ring',set:'lea',set_name:'Limited Edition Alpha',collector_number:'269',type_line:'Artifact',lang:'en',image_uris:{png:'https://cards.scryfall.io/png/front/scan.png',normal:'https://cards.scryfall.io/normal/front/scan.jpg'}};
+ const {app,request,fetchLocal,url}=await setup(t,{officialFetcher:async address=>{
+  requests.push(address);if(address.includes('scryfall.io'))return new Response(bytes,{headers:{'Content-Type':'image/png'}});
+  return new Response(JSON.stringify({data:[printing],total_cards:1,has_more:false}),{headers:{'Content-Type':'application/json'}});
+ }});
+ const deck=(await request('/api/decks','POST',{name:'Scan preferences',decklist:'1 Sol Ring'})).data,card=deck.cards[0];
+ app.store.run('UPDATE cards SET metadata=? WHERE id=?',JSON.stringify({name:card.name,oracle_id:oracleId}),card.id);
+ const catalog=await request(`/api/cards/${card.id}/official-printings?unique=cards&prefer=oldest&treatment=borderless`);
+ assert.equal(catalog.status,200);const params=new URL(requests[0]).searchParams;
+ assert.equal(params.get('unique'),'cards');assert.match(params.get('q'),/prefer:oldest/);assert.match(params.get('q'),/is:borderless/);
+ assert.match(catalog.data.cards[0].faces[0].images.png,/\/png$/);
+ const saved=await request(`/api/cards/${card.id}/official-printing`,'POST',{printing_id:printingId,quality:'normal'});
+ assert.equal(saved.status,201);assert.equal(saved.data.faces[0].source_format,'normal');assert.equal(saved.data.faces[0].width,745);
+ const download=await fetchLocal(url+`/official-printing-images/${printingId}/0/png?download=1`);
+ assert.equal(download.status,200);assert.match(download.headers.get('content-disposition'),/attachment;.*scryfall-.*\.png/);
+ assert.deepEqual(Buffer.from(await download.arrayBuffer()),bytes);
+ assert.equal((await request(`/api/cards/${card.id}/official-printing`,'POST',{printing_id:printingId,quality:'4k'})).status,400);
+});
+
 test('generation prompts prioritize single-line title fit over naming style requirements',async t=>{
  const {app,request}=await setup(t);app.queue.setPaused(true);
  const deck=(await request('/api/decks','POST',{name:'Title fit',style:'Always use a long ceremonial epithet.',decklist:'1 Sol Ring'})).data;

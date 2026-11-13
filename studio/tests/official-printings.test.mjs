@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {Store} from '../store.mjs';
-import {OfficialPrintings,printingFaces} from '../official-printings.mjs';
+import {OfficialPrintings,printingFaces,imageKind} from '../official-printings.mjs';
 import {JobQueue} from '../runner.mjs';
 const A='aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',B='bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',O='cccccccc-cccc-cccc-cccc-cccccccccccc';
 const card={id:A,oracle_id:O,name:'Sol Ring',set:'test',set_name:'Test set',collector_number:'1',type_line:'Artifact',oracle_text:'{T}: Add {C}{C}.',artist:'An artist',scryfall_uri:'https://scryfall.com/card/test/1',image_uris:{normal:'https://cards.scryfall.io/normal/front/test.jpg',png:'https://cards.scryfall.io/png/front/test.png'}};
@@ -82,4 +82,22 @@ test('Populate MTG art honours Scryfall prefer: and treatment choices, falling b
  assert.equal(service.populate(deck.id,{prefer:'oldest',treatment:'borderless'}).queued,1);assert.deepEqual(JSON.parse(store.get('SELECT printing_json FROM cards WHERE id=?',target.id).printing_json),{first_available:true,prefer:'oldest',treatment:'borderless'});
  await service.importNext();assert.equal(store.versions(target.id)[0].summary.id,B,'preferred printing used once the treatment search finds nothing');
  assert.deepEqual(queries,[{q:`oracleid:${O} game:paper lang:en is:borderless prefer:oldest`,unique:'cards'},{q:`oracleid:${O} game:paper lang:en is:borderless`,unique:'prints'},{q:`oracleid:${O} game:paper lang:en prefer:oldest`,unique:'cards'}]);
+});
+
+test('maximum quality uses the native PNG, explicit scan sizes persist and missing sizes fall back',async t=>{
+ const {store,target,deck}=setup(t),bytes=png(),calls=[];
+ const service=new OfficialPrintings(store,{gap:0,fetcher:async url=>{calls.push(url);return new Response(bytes,{headers:{'Content-Type':'image/png'}});}});
+ const printing={...card,image_uris:{...card.image_uris,large:'https://cards.scryfall.io/large/front/test.jpg'}};service.save(printing);
+ for(const [quality,kind]of [['max','png'],['large','large'],['normal','normal']]){
+  await service.select(target.id,A,{quality});const saved=store.versions(target.id)[0];
+  assert.equal(saved.summary.official_printing.image_quality,quality);assert.equal(saved.faces[0].source_format,kind);
+  assert.ok(calls.at(-1).includes('/'+kind+'/'));assert.equal(saved.faces[0].width,745,'preserves native pixels without upscaling');
+ }
+ assert.equal(imageKind({image_uris:{large:'x'}},'max'),'large');
+ assert.equal(imageKind({image_uris:{png:'x'}},'normal'),'png');
+ await assert.rejects(service.select(target.id,A,{quality:'4k'}),/image quality/);
+ assert.throws(()=>service.populate(deck.id,{quality:'4k'}),/image quality/);
+ const fresh=store.addCard(deck.id,{name:'Sol Ring',quantity:1},{separate:true});service.schedule=()=>{};
+ service.populate(deck.id,{quality:'normal',prefer:'oldest'});
+ assert.equal(JSON.parse(store.get('SELECT printing_json FROM cards WHERE id=?',fresh).printing_json).quality,'normal');
 });

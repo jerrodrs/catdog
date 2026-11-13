@@ -13,14 +13,20 @@ export const printingFaces=card=>card.image_uris?[{...card,name:card.name,image_
 export const OFFICIAL_PREFERENCES=['newest','oldest','default','atypical','promo','usd-low','usd-high','notub'];
 export const OFFICIAL_TREATMENTS={any:'',borderless:'is:borderless',fullart:'is:fullart',extendedart:'is:extendedart',showcase:'is:showcase',retro:'frame:old',textless:'is:textless'};
 export const artChoice=({prefer='newest',treatment='any'}={})=>{prefer=prefer||'newest';treatment=treatment||'any';if(!OFFICIAL_PREFERENCES.includes(prefer))throw Error('Invalid art preference.');if(!Object.hasOwn(OFFICIAL_TREATMENTS,treatment))throw Error('Invalid art treatment.');return {prefer,treatment};};
+export function imageQuality(value='max'){if(!['max','large','normal'].includes(value))throw Error('Choose maximum, large or standard image quality.');return value;}
+export function imageKind(face,quality='max'){
+ const order={max:['png','large','normal'],large:['large','png','normal'],normal:['normal','large','png']}[imageQuality(quality)];
+ const kind=order.find(kind=>face.image_uris?.[kind]);if(!kind)throw Error('This printing has no supported scan.');return kind;
+}
 const write=(filename,data)=>{const temp=filename+'.'+id()+'.tmp';fs.writeFileSync(temp,data);fs.renameSync(temp,filename);};
 export class OfficialPrintings{
  constructor(store,{fetcher=fetch,notify=()=>{},python='python3',gap=550}={}){
   Object.assign(this,{store,fetcher,notify,python,gap});this.chain=Promise.resolve();this.last=0;this.cooldown=0;this.inflight=new Map();this.locks=new Set();
   store.db.exec('CREATE TABLE IF NOT EXISTS official_printings(id TEXT PRIMARY KEY,data TEXT NOT NULL,updated_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS official_catalog_pages(cache_key TEXT PRIMARY KEY,data TEXT NOT NULL,updated_at TEXT NOT NULL)');
  }
- populate(deckId,{art_set_id,prefer,treatment}={}){
-  const choice=artChoice({prefer,treatment}),request={first_available:true,...(choice.prefer!=='newest'&&{prefer:choice.prefer}),...(choice.treatment!=='any'&&{treatment:choice.treatment})};
+ populate(deckId,{art_set_id,prefer,treatment,quality='max'}={}){
+  imageQuality(quality);
+  const choice=artChoice({prefer,treatment}),request={first_available:true,...(choice.prefer!=='newest'&&{prefer:choice.prefer}),...(choice.treatment!=='any'&&{treatment:choice.treatment}),...(quality!=='max'&&{quality})};
   const deck=this.store.deck(deckId);if(!deck)throw Error('Deck not found.');if(deck.archived)throw Error('Restore this deck before populating artwork.');if(art_set_id&&art_set_id!==deck.active_art_set_id)throw Error('The artwork set changed. Reopen the deck before populating artwork.');
   const candidates=deck.cards.filter(card=>!card.active_version_id&&!this.locks.has(card.id)&&!this.store.get("SELECT id FROM jobs WHERE card_id=? AND status IN ('queued','running')",card.id)&&!(card.art_mode==='official'&&card.printing_json!=='{}'&&!card.printing_error));
   this.store.transaction(()=>{for(const card of candidates)this.store.run("UPDATE cards SET art_mode='official',printing_json=?,printing_error='',approval='unreviewed' WHERE id=?",JSON.stringify(request),card.id);if(candidates.length)this.store.touch(deckId);});this.notify();this.schedule();return {queued:candidates.length,art_set_id:deck.active_art_set_id};
@@ -57,7 +63,7 @@ export class OfficialPrintings{
    }
    if(!this.matches({...card,metadata:JSON.parse(card.metadata||'{}'),token_spec:JSON.parse(card.token_spec||'{}')},printing))throw Error(`That printing is ${printing.name}, not ${card.name}. Check the card name, set and collector number.`);
    const current=this.store.get('SELECT * FROM cards WHERE id=?',card.id);if(!current||current.art_mode!=='official'||current.active_version_id||current.printing_json!==card.printing_json)return;
-   this.save(printing);await this.select(card.id,printing.id);
+   this.save(printing);await this.select(card.id,printing.id,{quality:requested.quality});
   }catch(e){if(Date.now()<this.cooldown)return;this.store.run('UPDATE cards SET printing_error=? WHERE id=? AND art_mode=\'official\' AND active_version_id IS NULL AND printing_json=?',String(e.message).slice(0,2000),card.id,card.printing_json);this.notify();}
  }
  retryImport(cardId){const card=this.writable(cardId);if(card.art_mode!=='official'||card.active_version_id||!(JSON.parse(card.printing_json).first_available===true||printingSpec(JSON.parse(card.printing_json))))throw Error('There is no pending official printing to retry.');this.store.run("UPDATE cards SET printing_error='' WHERE id=?",cardId);this.notify();this.schedule();return {ok:true};}
@@ -85,7 +91,7 @@ export class OfficialPrintings{
    if(spec.type_line&&key(spec.type_line)!==key(card.type_line))return false;
   }return true;
  }
- describe(card){const faces=printingFaces(card);return {id:card.id,name:card.name,set:card.set,set_name:card.set_name,collector_number:card.collector_number,released_at:card.released_at,lang:card.lang,rarity:card.rarity,artist:card.artist||[...new Set(faces.map(f=>f.artist).filter(Boolean))].join(', '),border_color:card.border_color,full_art:card.full_art,frame:card.frame,frame_effects:card.frame_effects||[],highres_image:card.highres_image,image_status:card.image_status,scryfall_uri:card.scryfall_uri,faces:faces.map((f,i)=>({name:f.name,preview:`/official-printing-images/${card.id}/${i}/normal`,image:`/official-printing-images/${card.id}/${i}/${f.image_uris.png?'png':'large'}`,format:f.image_uris.png?'png':'large'}))};}
+ describe(card){const faces=printingFaces(card);return {id:card.id,name:card.name,set:card.set,set_name:card.set_name,collector_number:card.collector_number,released_at:card.released_at,lang:card.lang,rarity:card.rarity,artist:card.artist||[...new Set(faces.map(f=>f.artist).filter(Boolean))].join(', '),border_color:card.border_color,full_art:card.full_art,frame:card.frame,frame_effects:card.frame_effects||[],highres_image:card.highres_image,image_status:card.image_status,scryfall_uri:card.scryfall_uri,faces:faces.map((f,i)=>{const kind=imageKind(f);return {name:f.name,preview:`/official-printing-images/${card.id}/${i}/normal`,image:`/official-printing-images/${card.id}/${i}/${kind}`,format:kind,images:Object.fromEntries(['png','large','normal'].filter(k=>f.image_uris[k]).map(k=>[k,`/official-printing-images/${card.id}/${i}/${k}`]))};})};}
  async catalog(cardId,{page=1,unique='prints',language='en',prefer='',treatment='any'}={}){
   const target=this.target(cardId);page=Number(page);if(!Number.isInteger(page)||page<1||page>100)throw Error('Invalid page.');if(!['art','prints','cards'].includes(unique))throw Error('Invalid printing filter.');
   if(prefer)artChoice({prefer});const filter=OFFICIAL_TREATMENTS[artChoice({treatment}).treatment];
@@ -120,7 +126,8 @@ export class OfficialPrintings{
    const chunks=[];let size=0;for await(const chunk of response.body){size+=chunk.length;if(size>limit)throw Error('Image exceeds the download limit.');chunks.push(chunk);}write(filename,Buffer.concat(chunks));return filename;
   })();this.inflight.set(requestKey,task);try{return await task;}finally{this.inflight.delete(requestKey);}
  }
- async select(cardId,printingId){
+ async select(cardId,printingId,{quality='max'}={}){
+  imageQuality(quality);
   if(this.locks.has(cardId))throw Error('An official printing is already being saved for this card.');this.locks.add(cardId);let directory;
   try{
    const target=this.writable(cardId),artSetId=this.store.artSets.ensure(target.deck_id),printing=await this.printing(printingId);if(!this.matches(target,printing))throw Error('Choose a printing of this same Magic card.');
@@ -128,11 +135,11 @@ export class OfficialPrintings{
    const versionId=id();directory=path.join(this.store.directory,'decks',target.deck_id,'cards',cardId,'versions',versionId);fs.mkdirSync(directory,{recursive:true});
    const saved=[];
    for(let i=0;i<faces.length;i++){
-    const source=await this.image(printingId,i,faces[i].image_uris.png?'png':'large'),destination=path.join(directory,i?'official-back.png':'official-front.png');
+    const kind=imageKind(faces[i],quality),source=await this.image(printingId,i,kind),destination=path.join(directory,i?'official-back.png':'official-front.png');
     const {stdout}=await run(this.python,['-c',`from PIL import Image\nimport json,sys\nim=Image.open(sys.argv[1]); im.load()\nif im.width>6000 or im.height>6000: raise ValueError('Unexpected image dimensions')\nim.save(sys.argv[2], format='PNG')\nprint(json.dumps({'width':im.width,'height':im.height,'dpi':round(min(im.width/63*25.4,im.height/88*25.4))}))`,source,destination],{timeout:20000});
-    saved.push({label:i?'back':'front',name:faces[i].name,image_path:destination,...JSON.parse(stdout)});
+    saved.push({label:i?'back':'front',name:faces[i].name,image_path:destination,source_format:kind,...JSON.parse(stdout)});
    }
-   const provenance={source:'scryfall',printing_id:printing.id,oracle_id:printing.oracle_id,scryfall_uri:printing.scryfall_uri,set:printing.set,set_name:printing.set_name,collector_number:printing.collector_number,downloaded_at:now(),faces:saved,notes:'Original full-card scans at native resolution; no AI generation or custom frame composition.'};
+   const provenance={source:'scryfall',printing_id:printing.id,oracle_id:printing.oracle_id,scryfall_uri:printing.scryfall_uri,set:printing.set,set_name:printing.set_name,collector_number:printing.collector_number,downloaded_at:now(),image_quality:quality,faces:saved,notes:'Original full-card scans at native resolution; no AI generation or custom frame composition.'};
    const report=path.join(directory,'report.json'),manifest=path.join(directory,'manifest.json');write(path.join(directory,'scryfall.json'),JSON.stringify(printing,null,2));write(report,JSON.stringify(provenance,null,2));write(manifest,JSON.stringify({kind:'official-printing',...provenance},null,2));
    this.writable(cardId);if(this.store.artSets.ensure(target.deck_id)!==artSetId)throw Error('The artwork set changed during this download. Choose this printing again in the intended set.');
    this.store.transaction(()=>{if(target.entry_kind==='token'){const spec=tokenSpec({...printing,name:target.name});this.store.run('UPDATE cards SET token_spec=? WHERE id=?',JSON.stringify(spec),cardId);}this.store.run('UPDATE cards SET metadata=? WHERE id=?',JSON.stringify(printing),cardId);this.store.addVersion(cardId,{id:versionId,source_type:'official',art_provider:'official',image_path:saved[0].image_path,manifest_path:manifest,report_path:report,faces:saved,summary:{...printing,official_printing:provenance},note:`Official · ${printing.set_name} · #${printing.collector_number}`});});
