@@ -59,6 +59,15 @@ that the pack does not ship. Those templates are not offered, and rendering them
 
 ## Commands
 
+On a Linux server, set `CARDSTUDIO_MSE_WINE` to the Wine executable,
+`WINEPREFIX` to a dedicated prefix, and `CARDSTUDIO_MSE_HOME` to a cache
+inside that prefix's `drive_c` (for example `drive_c/CardStudio/mse`).
+Install `xvfb-run` for headless exports and run `mse.install_fonts()` with these
+settings. Wine fonts are installed into the prefix's Windows Fonts directory
+and registered in one batch. Keep the Full Magic Pack in `vendor/Full-Magic-Pack`;
+only the cache is patched. The WSL/Windows path remains the default when Wine is
+not configured.
+
 ```
 python3 studio/mse_frames.py catalog                    # catalogue JSON (cached in library/mse/catalog.json)
 python3 studio/mse_frames.py import STYLE DIRECTORY     # config.json + validation previews for a frame version

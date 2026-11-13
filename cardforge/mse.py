@@ -237,7 +237,15 @@ def home():
 
 
 def windows_path(path):
-    return subprocess.run(['wslpath', '-w', str(path)], capture_output=True, text=True, check=True).stdout.strip()
+    converter = 'winepath' if os.environ.get('CARDSTUDIO_MSE_WINE') else 'wslpath'
+    return subprocess.run([converter, '-w', str(path)], capture_output=True, text=True, check=True).stdout.strip()
+
+
+def windows_command(program, *args):
+    """Opt into a headless Wine runtime on a Linux server; retain WSL interop."""
+    wine = os.environ.get('CARDSTUDIO_MSE_WINE')
+    prefix = ['xvfb-run', '-a', wine] if wine else []
+    return [*prefix, str(program), *args]
 
 
 PACKAGE = re.compile(r'(?<![\w-])((?:magic|en)[\w-]*\.mse-(?:include|symbol-font|game|style|export-template|locale))')
@@ -367,11 +375,14 @@ def refresh(package, target):
 
 def install_fonts():
     """Install the pack's fonts for the current Windows user (no administrator rights; MSE reads installed fonts)."""
-    target = home().parent.parent/'Microsoft/Windows/Fonts'
+    wine = bool(os.environ.get('CARDSTUDIO_MSE_WINE'))
+    target = Path(os.environ.get('WINEPREFIX', Path.home()/'.wine'))/'drive_c/windows/Fonts' if wine else home().parent.parent/'Microsoft/Windows/Fonts'
     target.mkdir(parents=True, exist_ok=True)
     from PIL import ImageFont
     key = r'HKCU\Software\Microsoft\Windows NT\CurrentVersion\Fonts'
     installed = []
+    registry = []
+    wine_target = windows_path(target) if wine else None
     for path in sorted((PACK/'Magic - Fonts').rglob('*')):
         if path.suffix.lower() not in ('.ttf', '.otf') or any(p.name == path.name for p in installed):
             continue
@@ -381,9 +392,16 @@ def install_fonts():
             shutil.copyfile(path, copy)
         label = family if style in ('Regular', '') else f'{family} {style}'
         kind = 'OpenType' if path.suffix.lower() == '.otf' else 'TrueType'
-        subprocess.run(['reg.exe', 'add', key, '/v', f'{label} ({kind})', '/t', 'REG_SZ', '/d', windows_path(copy), '/f'],
-                       capture_output=True, check=True, cwd='/mnt/c')
+        if wine:
+            registry.append(json.dumps(f'{label} ({kind})', ensure_ascii=False)+'='+json.dumps(wine_target+'\\'+copy.name, ensure_ascii=False))
+        else:
+            subprocess.run(windows_command('reg.exe', 'add', key, '/v', f'{label} ({kind})', '/t', 'REG_SZ', '/d', windows_path(copy), '/f'),
+                           capture_output=True, check=True, cwd='/mnt/c')
         installed.append(path)
+    if wine and registry:
+        registry_file = target/'card-studio-fonts.reg'
+        registry_file.write_text('Windows Registry Editor Version 5.00\n\n[HKEY_CURRENT_USER\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Fonts]\n'+'\n'.join(registry)+'\n', encoding='utf-16')
+        subprocess.run(windows_command('reg.exe', 'import', windows_path(registry_file)), capture_output=True, check=True, cwd=target, timeout=120)
     return [p.name for p in installed]
 
 
@@ -563,7 +581,7 @@ def run_mse(set_text, images, zoom, symbol):
                 z.writestr(key, data)
         with open(target/'.render-lock', 'w') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
-            result = subprocess.run([str(target/'magicseteditor.com'), '--export', name, 'card.mse-set', 'out.txt'],
+            result = subprocess.run(windows_command(target/'magicseteditor.com', '--export', name, 'card.mse-set', 'out.txt'),
                                     cwd=job, capture_output=True, text=True, timeout=600)
         outputs = sorted((job/'out-files').glob('card*.png'), key=lambda p: int(re.sub(r'\D', '', p.stem)))
         if not outputs:

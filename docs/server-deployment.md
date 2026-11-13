@@ -42,6 +42,14 @@ separate from the server's existing CI Codex configuration. Isolated jobs copy o
 authentication files and the image-generation skill into their temporary homes.
 
 Source updates should exclude `library/`, `.venv/`, `output/` and credentials.
+
+The local frame library was imported separately: 37 frame sets and 92 saved
+versions, including their reusable assets and printing references. This did not
+copy decks, card versions or generation jobs. The two Magic Set Editor frames
+use the dedicated Wine prefix at `~/.local/share/card-studio-mse/wine`, with
+their cache at `drive_c/CardStudio/mse`. Their fonts are installed inside that
+prefix. Wine is explicitly enabled only in the server environment.
+
 Back up the server's `library/` before any database migration. Stop the service or
 use SQLite's backup API when copying its database. Never replace the server
 library with the workstation library unless explicitly migrating data.
