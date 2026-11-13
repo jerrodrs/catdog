@@ -3,6 +3,7 @@ import math
 import re
 from PIL import ImageDraw
 from .typography import cap_center, centered_text
+from .frames import LOYALTY_SHIFT
 
 
 def ability_blocks(text):
@@ -17,7 +18,7 @@ def text_plan(card):
     from .render import wrap, LayoutError
     from .geometry import BODY_SIZES,planning_type_top
     type_top = planning_type_top(card,780 if card.get('profile') == 'dense' else 950)
-    top, bottom = type_top + 118, 1870
+    top, bottom = type_top + 118, 1870+LOYALTY_SHIFT
     from .template_sets import rules_inset
     inset = rules_inset(card)
     for size in (s for s in BODY_SIZES if s<=56):
@@ -85,4 +86,4 @@ def draw(image, card, plan, alignment):
         from .template_sets import rules_inset
         lines_at(plan['flavor'],106+rules_inset(card),plan['flavor_top'])
     loyalty_font=fitted('title',str(card['loyalty']),78,48,150)
-    alignment['loyalty']=centered_text(ImageDraw.Draw(image),(1230,1914,1430,2010),str(card['loyalty']),loyalty_font,HEADER_TEXT,align='center')
+    alignment['loyalty']=centered_text(ImageDraw.Draw(image),(1230,1914+LOYALTY_SHIFT,1430,2010+LOYALTY_SHIFT),str(card['loyalty']),loyalty_font,HEADER_TEXT,align='center')

@@ -44,9 +44,11 @@ def finish(image, settings, report=None, card=None, official=False):
     # Recesses for the actual statistics/loyalty panel, including editor positions.
     box = (report.get('geometry') or {}).get('stats')
     if not box and card.get('power') is not None:
-        box = (1176, 1916, 1442, 2018)
+        from .frames import STATS_BOX
+        box = STATS_BOX
     if card.get('loyalty') is not None:
-        box = (1215, 1904, 1445, 2020)
+        from .frames import LOYALTY_SHIFT
+        box = (1215, 1904+LOYALTY_SHIFT, 1445, 2020+LOYALTY_SHIFT)
     if box:
         x1, y1, x2, y2 = box
         box = (round((x1 - 6) / 1500 * w * scale), round((y1 - 6) / 2100 * h * scale), round((x2 + 6) / 1500 * w * scale), round((y2 + 6) / 2100 * h * scale))

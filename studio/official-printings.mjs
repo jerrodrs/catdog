@@ -13,11 +13,15 @@ export const printingFaces=card=>card.image_uris?[{...card,name:card.name,image_
 export const OFFICIAL_PREFERENCES=['newest','oldest','default','atypical','promo','usd-low','usd-high','notub'];
 export const OFFICIAL_TREATMENTS={any:'',borderless:'is:borderless',fullart:'is:fullart',extendedart:'is:extendedart',showcase:'is:showcase',retro:'frame:old',textless:'is:textless'};
 export const artChoice=({prefer='newest',treatment='any'}={})=>{prefer=prefer||'newest';treatment=treatment||'any';if(!OFFICIAL_PREFERENCES.includes(prefer))throw Error('Invalid art preference.');if(!Object.hasOwn(OFFICIAL_TREATMENTS,treatment))throw Error('Invalid art treatment.');return {prefer,treatment};};
+// Layouts the reconstruction renderer can rebuild from official artwork; others keep their original scan.
+export const reconstructable=printing=>['normal','token','transform','modal_dfc','adventure','prepare','saga','class'].includes(printing.layout||'normal')&&!/\bBattle\b/.test(printing.type_line||'');
+export const SWAP_FORMATS=['keep','official','reconstructed'];
 export function imageQuality(value='max'){if(!['max','large','normal'].includes(value))throw Error('Choose maximum, large or standard image quality.');return value;}
 export function imageKind(face,quality='max'){
  const order={max:['png','large','normal'],large:['large','png','normal'],normal:['normal','large','png']}[imageQuality(quality)];
  const kind=order.find(kind=>face.image_uris?.[kind]);if(!kind)throw Error('This printing has no supported scan.');return kind;
 }
+const isSwap=card=>{try{return JSON.parse(card.printing_json||'{}').swap===true&&!!card.active_version_id;}catch{return false;}};
 const write=(filename,data)=>{const temp=filename+'.'+id()+'.tmp';fs.writeFileSync(temp,data);fs.renameSync(temp,filename);};
 export class OfficialPrintings{
  constructor(store,{fetcher=fetch,notify=()=>{},python='python3',gap=550}={}){
@@ -31,6 +35,21 @@ export class OfficialPrintings{
   const candidates=deck.cards.filter(card=>!card.active_version_id&&!this.locks.has(card.id)&&!this.store.get("SELECT id FROM jobs WHERE card_id=? AND status IN ('queued','running')",card.id)&&!(card.art_mode==='official'&&card.printing_json!=='{}'&&!card.printing_error));
   this.store.transaction(()=>{for(const card of candidates)this.store.run("UPDATE cards SET art_mode='official',printing_json=?,printing_error='',approval='unreviewed' WHERE id=?",JSON.stringify(request),card.id);if(candidates.length)this.store.touch(deckId);});this.notify();this.schedule();return {queued:candidates.length,art_set_id:deck.active_art_set_id};
  }
+ // Re-pick the printing for every card that already shows real MTG art (original scan or reconstruction).
+ // The current image stays active until the replacement is saved; failures leave it in place with an error.
+ swap(deckId,{art_set_id,prefer,treatment,quality='max',format='keep'}={}){
+  imageQuality(quality);if(!SWAP_FORMATS.includes(format))throw Error('Choose original scans, reconstructed cards or each card’s current format.');
+  const choice=artChoice({prefer,treatment});
+  const deck=this.store.deck(deckId);if(!deck)throw Error('Deck not found.');if(deck.archived)throw Error('Restore this deck before swapping artwork.');if(art_set_id&&art_set_id!==deck.active_art_set_id)throw Error('The artwork set changed. Reopen the deck before swapping artwork.');
+  const candidates=deck.cards.filter(card=>card.active_version_id&&['official','reconstructed'].includes(card.art_mode)&&!this.locks.has(card.id)&&!this.store.get("SELECT id FROM jobs WHERE card_id=? AND status IN ('queued','running')",card.id));
+  this.store.transaction(()=>{for(const card of candidates){const request={first_available:true,swap:true,format:format==='keep'?card.art_mode:format,...(choice.prefer!=='newest'&&{prefer:choice.prefer}),...(choice.treatment!=='any'&&{treatment:choice.treatment}),...(quality!=='max'&&{quality})};this.store.run("UPDATE cards SET printing_json=?,printing_error='' WHERE id=?",JSON.stringify(request),card.id);}if(candidates.length)this.store.touch(deckId);});
+  this.notify();this.schedule();return {queued:candidates.length,art_set_id:deck.active_art_set_id};
+ }
+ // Keep the current MTG art and drop a pending or failed swap request.
+ cancelSwap(cardId){const card=this.target(cardId);if(this.locks.has(cardId))throw Error('Wait for the printing download to finish.');if(!isSwap(card))throw Error('There is no MTG art swap for this card.');this.store.run('UPDATE cards SET printing_json=?,printing_error=\'\' WHERE id=?',JSON.stringify(this.printingOf(card)),cardId);this.notify();return {ok:true};}
+ // printing_json an activated version would have: official scans record their set/number, reconstructions none.
+ printingOf(card){const version=card.active_version_id&&this.store.get('SELECT source_type,summary FROM versions WHERE id=?',card.active_version_id),summary=JSON.parse(version?.summary||'{}');return version?.source_type==='official'&&summary.set&&summary.collector_number?{set:summary.set,collector_number:summary.collector_number}:{};}
+ currentPrintingId(card){const version=card.active_version_id&&this.store.get('SELECT image_path,manifest_path FROM versions WHERE id=?',card.active_version_id);for(const file of [version?.manifest_path,version?.image_path].filter(Boolean)){try{return JSON.parse(fs.readFileSync(path.join(path.dirname(file),'scryfall.json'),'utf8')).id;}catch{}}return null;}
  async firstAvailable(cardId,choice={}){
   const {prefer,treatment}=artChoice(choice),preferred=prefer!=='newest',filtered=treatment!=='any';
   // Most specific first: preferred printing with the treatment, any printing with the treatment (newest first),
@@ -45,7 +64,7 @@ export class OfficialPrintings{
    }while(page<=100);
   }throw Error('No matching official card image is available from Scryfall. You can choose a printing manually or switch to custom artwork.');
  }
- pending(){return this.store.get("SELECT c.* FROM cards c JOIN decks d ON d.id=c.deck_id WHERE c.art_mode='official' AND c.active_version_id IS NULL AND c.printing_json!='{}' AND c.printing_error='' AND d.archived=0 ORDER BY c.created_at,c.rowid LIMIT 1");}
+ pending(){return this.store.get("SELECT c.* FROM cards c JOIN decks d ON d.id=c.deck_id WHERE c.printing_error='' AND d.archived=0 AND ((c.art_mode='official' AND c.active_version_id IS NULL AND c.printing_json!='{}') OR (c.art_mode IN ('official','reconstructed') AND c.active_version_id IS NOT NULL AND json_extract(c.printing_json,'$.swap')=1)) ORDER BY c.created_at,c.rowid LIMIT 1");}
  schedule(){
   if(this.closed||this.timer||this.active||!this.pending())return;
   this.timer=setTimeout(()=>{this.timer=null;if(this.closed)return;this.active=this.importNext().catch(()=>{}).finally(()=>{this.active=null;this.schedule();});},Math.max(25,this.cooldown-Date.now()));this.timer.unref?.();
@@ -62,11 +81,16 @@ export class OfficialPrintings{
     if(String(printing.set).toLowerCase()!==spec.set||String(printing.collector_number).toLowerCase()!==spec.collector_number.toLowerCase())throw Error('Scryfall returned a different set or collector number.');
    }
    if(!this.matches({...card,metadata:JSON.parse(card.metadata||'{}'),token_spec:JSON.parse(card.token_spec||'{}')},printing))throw Error(`That printing is ${printing.name}, not ${card.name}. Check the card name, set and collector number.`);
-   const current=this.store.get('SELECT * FROM cards WHERE id=?',card.id);if(!current||current.art_mode!=='official'||current.active_version_id||current.printing_json!==card.printing_json)return;
-   this.save(printing);await this.select(card.id,printing.id,{quality:requested.quality});
-  }catch(e){if(Date.now()<this.cooldown)return;this.store.run('UPDATE cards SET printing_error=? WHERE id=? AND art_mode=\'official\' AND active_version_id IS NULL AND printing_json=?',String(e.message).slice(0,2000),card.id,card.printing_json);this.notify();}
+   const current=this.store.get('SELECT * FROM cards WHERE id=?',card.id),swap=requested.swap===true;if(!current||current.printing_json!==card.printing_json||(swap?!current.active_version_id||!['official','reconstructed'].includes(current.art_mode):current.art_mode!=='official'||current.active_version_id))return;
+   this.save(printing);
+   if(!swap)return void await this.select(card.id,printing.id,{quality:requested.quality});
+   // Layouts without a reconstruction template fall back to the original scan rather than failing the swap.
+   const format=requested.format==='reconstructed'&&this.reconstruction&&reconstructable(printing)?'reconstructed':'official';
+   if(format===current.art_mode&&this.currentPrintingId(current)===printing.id){this.store.run("UPDATE cards SET printing_json=?,printing_error='' WHERE id=? AND printing_json=?",JSON.stringify(this.printingOf(current)),card.id,card.printing_json);this.notify();return;}
+   if(format==='reconstructed')await this.reconstruction.create(card.id,{printing_id:printing.id});else await this.select(card.id,printing.id,{quality:requested.quality});
+  }catch(e){if(Date.now()<this.cooldown)return;this.store.run('UPDATE cards SET printing_error=? WHERE id=? AND printing_json=? AND ((art_mode=\'official\' AND active_version_id IS NULL) OR json_extract(printing_json,\'$.swap\')=1)',String(e.message).slice(0,2000),card.id,card.printing_json);this.notify();}
  }
- retryImport(cardId){const card=this.writable(cardId);if(card.art_mode!=='official'||card.active_version_id||!(JSON.parse(card.printing_json).first_available===true||printingSpec(JSON.parse(card.printing_json))))throw Error('There is no pending official printing to retry.');this.store.run("UPDATE cards SET printing_error='' WHERE id=?",cardId);this.notify();this.schedule();return {ok:true};}
+ retryImport(cardId){const card=this.writable(cardId);if(isSwap(card)){this.store.run("UPDATE cards SET printing_error='' WHERE id=?",cardId);this.notify();this.schedule();return {ok:true};}if(card.art_mode!=='official'||card.active_version_id||!(JSON.parse(card.printing_json).first_available===true||printingSpec(JSON.parse(card.printing_json))))throw Error('There is no pending official printing to retry.');this.store.run("UPDATE cards SET printing_error='' WHERE id=?",cardId);this.notify();this.schedule();return {ok:true};}
  async close(){this.closed=true;clearTimeout(this.timer);await this.active;}
  target(cardId){const card=this.store.get('SELECT * FROM cards WHERE id=?',cardId);if(!card)throw Error('Card not found.');return {...card,metadata:JSON.parse(card.metadata||'{}'),token_spec:JSON.parse(card.token_spec||'{}')};}
  writable(cardId){const card=this.target(cardId);if(this.store.deck(card.deck_id).archived)throw Error('Restore this deck before changing its artwork.');if(this.store.get("SELECT id FROM jobs WHERE card_id=? AND status IN ('queued','running')",cardId))throw Error('Wait for or cancel this card’s generation before choosing artwork.');return card;}

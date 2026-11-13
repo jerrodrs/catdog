@@ -3,6 +3,7 @@ import math,re
 from PIL import Image,ImageColor,ImageDraw
 from .typography import cap_center,centered_text
 from .template_sets import rules_inset,rules_bottom
+from .frames import text_bottom
 
 LEVEL=re.compile(r'^((?:\{[^}]+\})+):\s*Level\s+(\d+)$')
 SYMBOL=re.compile(r'\{[^}]+\}')
@@ -25,7 +26,7 @@ def blocks(text):
 def text_plan(card):
     from .render import wrap,LayoutError
     from .geometry import BODY_SIZES,planning_type_top
-    boundary=planning_type_top(card,1100);top=boundary+118;bottom=1900 if 'power' in card else 1940
+    boundary=planning_type_top(card,1100);top=boundary+118;bottom=text_bottom(card)
     source=blocks(card['oracle_text'])
     inset=rules_inset(card);bottom=rules_bottom(card,bottom);left=106+inset;width=1288-2*inset
     for size in BODY_SIZES:

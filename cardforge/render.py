@@ -235,7 +235,8 @@ def text_plan(card):
     from .geometry import BODY_SIZES,planning_type_top
     type_top=planning_type_top(card,PROFILES[card.get('profile','standard')])
     top = type_top + 118
-    bottom = 1900 if 'power' in card else 1940
+    from .frames import text_bottom
+    bottom = text_bottom(card)
     from .template_sets import rules_inset, rules_bottom
     width = 1288 - 2*rules_inset(card)
     bottom = rules_bottom(card, bottom)

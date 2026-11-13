@@ -47,8 +47,35 @@ def apply_controls(config,controls):
     return config
 
 
+GEOMETRY_VERSION=2
+
+
+def migrate_set(config):
+    """Frame sets authored before the rules panel ran down to the bottom margin (no geometry_version) placed their
+    lower-edge decorations and ornaments around the old panel bottom, y=1974. Move those pieces down with the
+    panel; card-edge perimeter trim and full-height pieces stay put. In place and idempotent."""
+    if not isinstance(config,dict) or config.get('renderer')=='mse' or config.get('geometry_version',1)>=GEOMETRY_VERSION:return config
+    from .frames import PANEL_SHIFT
+    number=lambda v:isinstance(v,(int,float)) and not isinstance(v,bool)
+    lower=lambda x0,y0,x1,y1:x0>=40 and x1<=1460 and 1800<=y0<=1990
+    for item in config.get('decorations',[]) if isinstance(config.get('decorations'),list) else []:
+        box=item.get('box') if isinstance(item,dict) else None
+        if isinstance(box,list) and len(box)==4 and all(map(number,box)) and lower(*box):
+            shift=max(0,min(PANEL_SHIFT,2100-box[3]));item['box']=[box[0],box[1]+shift,box[2],box[3]+shift]
+    for item in config.get('ornaments',[]) if isinstance(config.get('ornaments'),list) else []:
+        points=item.get('points') if isinstance(item,dict) else None
+        if isinstance(points,list) and points and all(isinstance(p,list) and len(p)==2 and all(map(number,p)) for p in points):
+            xs,ys=[p[0] for p in points],[p[1] for p in points]
+            if lower(min(xs),min(ys),max(xs),max(ys)):item['points']=[[x,y+PANEL_SHIFT] for x,y in points]
+    for style in [config.get('style',{}),*(config.get('layouts',{}) or {}).values()]:
+        if isinstance(style,dict) and number(style.get('stats_y')):style['stats_y']=min(2038,style['stats_y']+PANEL_SHIFT)
+    config['geometry_version']=GEOMETRY_VERSION
+    return config
+
+
 def validate_set(config):
     from .render import LayoutError
+    migrate_set(config)
     if not isinstance(config,dict) or config.get('schema_version') not in (1,2,3):
         raise LayoutError('Frame set requires schema_version 1, 2 or 3')
     if config.get('renderer')=='mse':
@@ -101,7 +128,7 @@ def validate_set(config):
             if key in style:color(style[key])
         for key in ('title_padding','type_padding','alias_padding'):
             if key in style and (not isinstance(style[key],(int,float)) or not 8<=style[key]<=60):raise LayoutError('Frame padding must be between 8 and 60 px')
-        for key,minimum,maximum in [('title_offset_y',-10,100),('rules_offset_y',-150,600),('stats_x',40,1280),('stats_y',1906,1990),('stats_width',180,480),('stats_height',80,160)]:
+        for key,minimum,maximum in [('title_offset_y',-10,100),('rules_offset_y',-150,600),('stats_x',40,1280),('stats_y',1906,2038),('stats_width',180,480),('stats_height',80,160)]:
             if key in style and (not isinstance(style[key],(int,float)) or not minimum<=style[key]<=maximum):raise LayoutError('Invalid visual frame position')
         if not isinstance(style.get('rail_width',12),int) or not 4<=style.get('rail_width',12)<=36: raise LayoutError('Frame rail_width must be 4–36 px')
         if not isinstance(style.get('panel_alpha',198),int) or not 160<=style.get('panel_alpha',198)<=255: raise LayoutError('Panel opacity must be 160–255')
@@ -179,17 +206,17 @@ def style_bar(style,box):
 
 def body_points(style,type_top):
     """Rules-box outline. Its top, sides and text area never move; panel_bottom and panel_corners only reshape the
-    lower edge and lower corners, below the last rules line (rules_bottom keeps text above y=1934)."""
+    lower edge and lower corners, below the last rules line (rules_bottom keeps text above the arch top)."""
     import math
-    from .frames import body_path
+    from .frames import body_path,PANEL_BOTTOM,PANEL_SHIFT
     bottom,corners,c=style.get('panel_bottom','arch'),style.get('panel_corners','square'),style.get('panel_corner_size',24)
     if bottom=='arch' and corners=='square':return body_path(type_top)
-    top=type_top+76;x1,y1=1422,1974
+    top=type_top+76;x1,y1=1422,PANEL_BOTTOM
     if corners=='cut':corner=[(x1,y1-c),(x1-c,y1)]
     elif corners=='rounded':corner=[(x1-c+c*math.cos(math.radians(a)),y1-c+c*math.sin(math.radians(a))) for a in range(0,91,6)]
     elif corners=='notched':corner=[(x1-c*math.sin(math.radians(a)),y1-c*math.cos(math.radians(a))) for a in range(0,91,6)]
     else:corner=[(x1,y1)]
-    centre={'arch':body_path(type_top)[3:12],'flat':[],'notch':[(812,1974),(750,1940),(688,1974)],'step':[(812,1974),(812,1944),(688,1944),(688,1974)]}[bottom]
+    centre={'arch':body_path(type_top)[3:12],'flat':[],'notch':[(812,y1),(750,y1-34),(688,y1)],'step':[(812,y1),(812,y1-30),(688,y1-30),(688,y1)]}[bottom]
     return [(78,top),(x1,top),*corner,*centre,*[(1500-x,y) for x,y in reversed(corner)]]
 
 
@@ -330,9 +357,10 @@ def rules_inset(card):
 
 def rules_bottom(card,bottom):
     """Lowest rules line-box bottom on a frame set: the last line's ink (about 10px above it) stays clear of the
-    rails along the panel's bottom arch, whose top is at y=1934."""
+    rails along the panel's bottom arch, whose top is 40px above the panel bottom."""
+    from .frames import PANEL_BOTTOM
     if not card.get('frame_style'):return bottom
-    return min(bottom,1934-rail_depth(layout_style(card))-TEXT_GAP+10)
+    return min(bottom,PANEL_BOTTOM-40-rail_depth(layout_style(card))-TEXT_GAP+10)
 
 
 def alias_text_box(card,geometry):
@@ -513,7 +541,7 @@ def panel_skin(config,name,size,tint=None):
 
 
 def layout_style(card):
-    config=card.get('frame_style') or {}
+    config=migrate_set(card.get('frame_style') or {})
     kind=layout_kind(card)
     fallback=config.get('layouts',{}).get('enchantment',{}) if kind in ('saga','class') else config.get('layouts',{}).get('creature',{}) if kind in ('adventure','prepare') else {}
     return {**config.get('style',{}),**config.get('layouts',{}).get(kind,fallback)}
@@ -550,7 +578,7 @@ def custom_frame(card,type_top,output_scale=1):
 
 @lru_cache(maxsize=8)
 def _build(serialized,colors,legendary,kind,type_top,alias,stats,geometry_json,output_scale=1):
-    from .frames import _mask,_erode,_paint,TITLE_BOX,type_box,bar_path,body_path,alias_path,crown_path
+    from .frames import _mask,_erode,_paint,TITLE_BOX,type_box,bar_path,body_path,alias_path,crown_path,loyalty_shield
     config=json.loads(serialized)
     style={**config.get('style',{}),**config['layouts'].get(kind,config['layouts'].get('creature',{}))}
     geometry=json.loads(geometry_json)
@@ -632,7 +660,7 @@ def _build(serialized,colors,legendary,kind,type_top,alias,stats,geometry_json,o
         x0,y0,x1,y1=geometry['alias'];panel([(x0,y0),(x1,y0),(x1-42,y1),(x0+42,y1)],palette['header'],max(235,style.get('panel_alpha',198)),'title',surface='alias')
     panel(shaped(geometry['title']),palette['header'],245 if style.get('panel_alpha',198)<255 else 255,'title')
     panel(shaped(geometry['type']),style.get('panel_color','#111a17'),max(235,style.get('panel_alpha',198)),'type')
-    if stats=='loyalty': panel([(1220,1906),(1442,1906),(1442,1980),(1331,2040),(1220,1980)],palette['header'],255,'stats')
+    if stats=='loyalty': panel(loyalty_shield(),palette['header'],255,'stats')
     elif stats: panel(shaped(geometry['stats']),palette['header'],255,'stats')
     draw_ornaments(layer,config,palette,kind,legendary,'over',safe)
     apply_decorations(layer,config,geometry,type_top,kind,legendary,'over',stats,palette,safe)

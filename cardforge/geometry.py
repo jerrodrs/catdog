@@ -1,8 +1,7 @@
 """Measured card geometry and bounded, content-fitted rules panels."""
 import re
-from .frames import TITLE_BOX, ALIAS_TEXT_BOX, ALIAS_BOX, type_box
+from .frames import TITLE_BOX, ALIAS_TEXT_BOX, ALIAS_BOX, type_box, PANEL_BOTTOM, STATS_BOX
 
-PANEL_BOTTOM=1974
 MAX_RULES_HEIGHT=840  # 40% of the 2100px card, including the type bar.
 BODY_SIZES=tuple(range(64,35,-2))
 
@@ -57,9 +56,9 @@ def boxes(card,type_top):
     type_bounds=fit_bar(card,'type',type_bounds)
     result={'title':title,'alias':alias,'alias_text':alias_text,'type':type_bounds}
     if 'power' in card:
-        x,y=options.get('stats_x',1176),options.get('stats_y',1916)
+        x,y=options.get('stats_x',STATS_BOX[0]),options.get('stats_y',STATS_BOX[1])
         width,height=options.get('stats_width',266),options.get('stats_height',102)
-        if x+width>1460 or y+height>2070:
+        if x+width>1460 or y+height>2080:
             from .render import LayoutError
             raise LayoutError('Keep the power/toughness box within the card edges.')
         result['stats']=stats_box(card,(x,y,x+width,y+height))

@@ -51,6 +51,7 @@ export function createStudio(options = {}) {
   const borders=new BorderFinish(store,root,{python:options.runner?.python||process.env.CARDFORGE_PYTHON||'python3'});
   const quality=new CardQuality(store,root,{notify,python:options.runner?.python||'python3'});
   const reconstruction=new Reconstruction(store,official,root,{notify,python:options.runner?.python||'python3'});
+  official.reconstruction=reconstruction;
   const printing=new PrintStudio(store,official,borders);
   const printHistory=new PrintHistory(store,borders);
   const framePreview=new DeckFramePreview(store,root,frames,borders,{python:options.runner?.python||process.env.CARDFORGE_PYTHON||'python3'});
@@ -301,6 +302,7 @@ export function createStudio(options = {}) {
         if(action==='guidelines'&&req.method==='GET')return send(res,200,artStyles.deckGuidelines(deckId));
         if(action==='guidelines'&&req.method==='PATCH')return send(res,200,artStyles.updateDeck(deckId,await body(req)));
         if(action==='populate-mtg-art'&&req.method==='POST')return send(res,202,official.populate(deckId,await body(req)));
+        if(action==='swap-mtg-art'&&req.method==='POST')return send(res,202,official.swap(deckId,await body(req)));
         if(action==='frame-preview'&&req.method==='GET'){
           const frameSetId=url.searchParams.get('frame_set_id')||deck.frame_set_id;
           if(!parts[4])return send(res,200,framePreview.list(deck,frameSetId,url.searchParams.get('preview_session')||'',url.searchParams.get('preview_generation')||0));
@@ -363,6 +365,7 @@ export function createStudio(options = {}) {
         if(parts[3]==='reconstruct'&&req.method==='POST')return send(res,201,await reconstruction.create(card.id,await body(req,45*1024*1024)));
         if(parts[3]==='official-printing'&&req.method==='POST'){const data=await body(req);return send(res,201,await official.select(card.id,data.printing_id,{quality:data.quality}));}
         if(parts[3]==='retry-official-import'&&req.method==='POST'){await body(req);return send(res,200,official.retryImport(card.id));}
+        if(parts[3]==='cancel-mtg-art-swap'&&req.method==='POST'){await body(req);return send(res,200,official.cancelSwap(card.id));}
         if(parts[3]==='use-custom-art'&&req.method==='POST'){await body(req);return send(res,200,official.useCustom(card.id));}
         if(parts[3]==='artwork-sources'&&req.method==='GET')return send(res,200,artworkLibrary.sources(card.id));
         if(parts[3]==='reuse-artwork'&&req.method==='POST')return send(res,201,await artworkLibrary.reuse(card.id,(await body(req)).source_version_id));

@@ -101,3 +101,21 @@ test('maximum quality uses the native PNG, explicit scan sizes persist and missi
  service.populate(deck.id,{quality:'normal',prefer:'oldest'});
  assert.equal(JSON.parse(store.get('SELECT printing_json FROM cards WHERE id=?',fresh).printing_json).quality,'normal');
 });
+test('swap MTG art re-picks printings for scan and reconstructed cards, keeping current art until saved',async t=>{
+ const {store,target,deck}=setup(t),bytes=png(),newer={...card,id:B,set:'new',set_name:'Newer set',collector_number:'9'};let fail=false;
+ const service=new OfficialPrintings(store,{gap:0,fetcher:async url=>{if(fail)throw Error('offline');return url.includes('scryfall.io')?new Response(bytes,{headers:{'Content-Type':'image/png'}}):json({data:[newer],total_cards:1,has_more:false});}});service.schedule=()=>{};
+ const built=[];service.reconstruction={create:async(cardId,{printing_id})=>{built.push(printing_id);return {version_id:store.addVersion(cardId,{image_path:'r.png',source_type:'reconstructed',art_provider:'official',summary:{}})};}};
+ service.save(card);await service.select(target.id,A);const scan=store.deck(deck.id).cards[0].active_version_id;
+ assert.throws(()=>service.swap(deck.id,{format:'bogus'}),/Choose original/);assert.throws(()=>service.swap(deck.id,{art_set_id:'wrong'}),/changed/);
+ // Same printing + same format: nothing new is saved and the flag is cleared.
+ store.run("UPDATE cards SET printing_json=? WHERE id=?",JSON.stringify({first_available:true,swap:true,format:'official'}),target.id);service.firstAvailable=async()=>card;await service.importNext();assert.equal(store.versions(target.id).length,1);assert.deepEqual(JSON.parse(store.deck(deck.id).cards[0].printing_json),{set:'test',collector_number:'1'});delete service.firstAvailable;
+ // A failed swap keeps the current image, reports the error, and can be retried or dismissed.
+ assert.equal(service.swap(deck.id,{art_set_id:deck.active_art_set_id,prefer:'oldest'}).queued,1);assert.deepEqual(JSON.parse(store.deck(deck.id).cards[0].printing_json),{first_available:true,swap:true,format:'official',prefer:'oldest'});
+ fail=true;await service.importNext();let current=store.deck(deck.id).cards[0];assert.match(current.printing_error,/reach Scryfall/);assert.equal(current.active_version_id,scan);assert.equal(service.pending(),undefined);
+ service.cancelSwap(target.id);current=store.deck(deck.id).cards[0];assert.deepEqual(JSON.parse(current.printing_json),{set:'test',collector_number:'1'});assert.equal(current.printing_error,'');assert.throws(()=>service.cancelSwap(target.id),/no MTG art swap/);
+ service.swap(deck.id);fail=true;await service.importNext();fail=false;service.retryImport(target.id);await service.importNext();current=store.deck(deck.id).cards[0];
+ assert.notEqual(current.active_version_id,scan);assert.equal(store.versions(target.id)[0].summary.id,B);assert.equal(current.art_mode,'official');assert.deepEqual(JSON.parse(current.printing_json),{set:'new',collector_number:'9'});assert.equal(store.versions(target.id).length,2);
+ // Switching every MTG card to the reconstructed format; custom-art cards are never touched.
+ assert.equal(service.swap(deck.id,{format:'reconstructed'}).queued,1);await service.importNext();current=store.deck(deck.id).cards[0];assert.deepEqual(built,[B]);assert.equal(current.art_mode,'reconstructed');assert.equal(current.printing_json,'{}');
+ store.run("UPDATE cards SET art_mode='custom' WHERE id=?",target.id);assert.equal(service.swap(deck.id).queued,0);
+});

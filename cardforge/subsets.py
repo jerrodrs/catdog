@@ -14,6 +14,7 @@ def columns(card):
     real lower edge, including rounded/cut corners and arches. The box and main text split the text area evenly."""
     import numpy as np
     from .template_sets import rules_inset,rules_bottom,layout_style,body_points,rail_depth
+    from .frames import text_bottom
     from .geometry import boxes
     style=layout_style(card);depth=rail_depth(style) if card.get('frame_style') else 12
     text_left=106+rules_inset(card);text_right=1500-text_left;margin=max(16,text_left-(78+depth))
@@ -27,7 +28,7 @@ def columns(card):
     box_bottom=lowest-reach
     stats=boxes(card,0).get('stats') if 'power' in card else None
     if stats and box_right>stats[0]-margin:box_bottom=min(box_bottom,stats[1]-margin)
-    main_bottom=rules_bottom(card,1900 if stats and main_right>stats[0] else 1940)
+    main_bottom=rules_bottom(card,text_bottom(card,bool(stats and main_right>stats[0])))
     return {'margin':margin,'box_left':box_left,'box_right':box_right,'box_bottom':box_bottom,'main_left':main_left,'main_width':main_right-main_left,'main_bottom':main_bottom,'spell_width':width-2*PAD,'right':right}
 
 

@@ -20,6 +20,23 @@ KINDS = tuple('WUBRGC') + PAIRS + ('M',)
 TITLE_BOX = (58, 54, 1442, 186)
 ALIAS_BOX = (96, TITLE_BOX[3]-8, 1404, TITLE_BOX[3]+68)
 ALIAS_TEXT_BOX = (152, TITLE_BOX[3], 1348, ALIAS_BOX[3])
+# No footer text is ever drawn, so the rules panel runs down to the same 78px margin as its sides (2100-78).
+# Everything attached to the panel's lower edge (text limits, stats box, lower decorations) moves with it.
+PANEL_BOTTOM = 2022
+PANEL_SHIFT = PANEL_BOTTOM-1974  # from the original footer-clearing panel bottom
+LOYALTY_SHIFT = 24  # the taller loyalty shield moves half as far, keeping its point clear of the card edge
+
+STATS_BOX = (1176, 1916+PANEL_SHIFT, 1442, 2018+PANEL_SHIFT)
+
+
+
+def text_bottom(card, stats=None):
+    """Lowest rules line-box bottom: clear of the stats box when there is one, otherwise the panel's padding."""
+    return (1900 if ('power' in card if stats is None else stats) else 1940)+PANEL_SHIFT
+
+
+def loyalty_shield():
+    return [(x, y+LOYALTY_SHIFT) for x, y in [(1220,1906),(1442,1906),(1442,1980),(1331,2040),(1220,1980)]]
 
 
 def type_box(type_top):
@@ -91,10 +108,9 @@ def crown_path():
 
 def body_path(type_top):
     # Centre arch provides the reference's familiar bottom-frame contour.
-    return [(78, type_top+76), (1422, type_top+76), (1422, 1974),
-            (856, 1974), (832, 1956), (805, 1942), (778, 1936),
-            (750, 1934), (722, 1936), (695, 1942), (668, 1956),
-            (644, 1974), (78, 1974)]
+    arch = [(1422, 1974), (856, 1974), (832, 1956), (805, 1942), (778, 1936), (750, 1934),
+            (722, 1936), (695, 1942), (668, 1956), (644, 1974), (78, 1974)]
+    return [(78, type_top+76), (1422, type_top+76), *[(x, y+PANEL_SHIFT) for x, y in arch]]
 
 
 def _mask(points):
@@ -184,9 +200,9 @@ def _build(key, type_top, alias, stats, output_scale=1):
     _bevel(layer, bar_path(type_box(type_top)), color, '#171c1b', 222, 12)
     if stats:
         if stats == 'loyalty':
-            _bevel(layer, [(1220,1906),(1442,1906),(1442,1980),(1331,2040),(1220,1980)], color, 'header', 250, 11)
+            _bevel(layer, loyalty_shield(), color, 'header', 250, 11)
         else:
-            _bevel(layer, bar_path((1176, 1916, 1442, 2018)), color, 'header', 250, 11)
+            _bevel(layer, bar_path(STATS_BOX), color, 'header', 250, 11)
     return layer if output_scale==2 else layer.resize(SIZE, Image.Resampling.LANCZOS)
 
 

@@ -7,6 +7,8 @@ from PIL import Image,ImageDraw,ImageChops,ImageOps
 def load_set(filename):
     filename=Path(filename).resolve(strict=True)
     config=json.loads(filename.read_text());config['_asset_root']=str(filename.parent)
+    from .template_sets import migrate_set
+    migrate_set(config)
     for item in [*config.get('decorations',[]),*config.get('textures',{}).values(),*config.get('skins',{}).values()]:
         source=asset_path(config,item)
         actual=hashlib.sha256(source.read_bytes()).hexdigest()
@@ -88,12 +90,13 @@ def tinted(image,palette,item):
 
 def safe_mask(size,geometry,type_top,statistics=''):
     """Inverse of the measured lettering/statistics regions for one card; ornaments and decorations draw only here."""
+    from .frames import PANEL_SHIFT,LOYALTY_SHIFT
     scale=2 if size[0]==3000 else 1
     protected=Image.new('L',size,0);d=ImageDraw.Draw(protected)
-    boxes=[(94,geometry['title'][1]+4,1406,geometry['title'][3]-4),(152,geometry['alias_text'][1],1348,geometry['alias_text'][3]),(94,geometry['type'][1]+4,1406,geometry['type'][3]-4),(106,type_top+108,1394,1904)]
+    boxes=[(94,geometry['title'][1]+4,1406,geometry['title'][3]-4),(152,geometry['alias_text'][1],1348,geometry['alias_text'][3]),(94,geometry['type'][1]+4,1406,geometry['type'][3]-4),(106,type_top+108,1394,1904+PANEL_SHIFT)]
     if geometry.get('stats'):
         x0,y0,x1,y1=geometry['stats'];boxes.append((x0-5,y0-5,x1+5,y1+5))
-    if statistics=='loyalty':boxes.append((1215,1901,1447,2045))
+    if statistics=='loyalty':boxes.append((1215,1901+LOYALTY_SHIFT,1447,2045+LOYALTY_SHIFT))
     for box in boxes:d.rectangle(tuple(round(v*scale) for v in box),fill=255)
     return ImageChops.invert(protected)
 

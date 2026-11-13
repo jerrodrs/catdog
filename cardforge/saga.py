@@ -3,6 +3,7 @@ import math,re
 from PIL import ImageDraw
 from .typography import cap_center,centered_text
 from .template_sets import rules_inset,rules_bottom
+from .frames import text_bottom
 
 CHAPTER=re.compile(r'^([IVXLCDM]+(?:\s*,\s*[IVXLCDM]+)*)\s+[—–-]\s*(.*)$')
 ROMAN=re.compile(r'M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})')
@@ -25,7 +26,7 @@ def blocks(text):
 def text_plan(card):
     from .render import wrap,LayoutError
     from .geometry import BODY_SIZES,planning_type_top
-    boundary=planning_type_top(card,1100);top=boundary+118;bottom=1900 if 'power' in card else 1940
+    boundary=planning_type_top(card,1100);top=boundary+118;bottom=text_bottom(card)
     source=blocks(card['oracle_text'])
     inset=rules_inset(card);bottom=rules_bottom(card,bottom)
     for size in BODY_SIZES:

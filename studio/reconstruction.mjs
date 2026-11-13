@@ -1,4 +1,4 @@
-import fs from 'node:fs';import path from 'node:path';import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {id} from './store.mjs';import {printingFaces} from './official-printings.mjs';
+import fs from 'node:fs';import path from 'node:path';import {execFile} from 'node:child_process';import {promisify} from 'node:util';import {id} from './store.mjs';import {printingFaces,reconstructable} from './official-printings.mjs';
 const run=promisify(execFile);
 export class Reconstruction {
  constructor(store,official,root,{notify=()=>{},python='python3'}={}){Object.assign(this,{store,official,root,notify,python});}
@@ -8,7 +8,7 @@ export class Reconstruction {
   try{
    const target=this.official.writable(cardId),setId=this.store.artSets.ensure(target.deck_id),printing=await this.official.printing(printing_id);
    if(!this.official.matches(target,printing))throw Error('Choose a printing of this same Magic card.');
-   if(!['normal','token','transform','modal_dfc','adventure','prepare','saga','class'].includes(printing.layout||'normal')||/\bBattle\b/.test(printing.type_line||''))throw Error('This layout needs a dedicated reconstruction template; its original scan is still available.');
+   if(!reconstructable(printing))throw Error('This layout needs a dedicated reconstruction template; its original scan is still available.');
    const faces=printingFaces(printing);if(!faces.length||faces.length>2)throw Error('This printing has no supported artwork faces.');
    const versionId=id();directory=path.join(this.store.directory,'decks',target.deck_id,'cards',cardId,'versions',versionId);fs.mkdirSync(directory,{recursive:true});
    const artPaths=[],sources=[];

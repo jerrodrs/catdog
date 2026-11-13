@@ -143,10 +143,11 @@ class ExtendedLayoutTests(unittest.TestCase):
         style=layout_style(land);margin=106+rules_inset(land)-(78+rail_depth(style))
         self.assertEqual(left-(78+rail_depth(style)),margin)
         self.assertEqual(top-report['geometry']['type'][3],margin)
-        self.assertEqual(1974-rail_depth(style)-bottom,margin)
+        from cardforge.frames import PANEL_BOTTOM,STATS_BOX
+        self.assertEqual(PANEL_BOTTOM-rail_depth(style)-bottom,margin)
         # A prepare spell on the stats side stops above the power/toughness box.
         prepare=preview_card('prepare',config);_,report=render(prepare)
-        box=report['alignment']['inset_spell']['box'];self.assertLess(box[3],report['alignment']['statistics']['box'][1] if 'box' in report['alignment']['statistics'] else 1916)
+        box=report['alignment']['inset_spell']['box'];self.assertLess(box[3],report['alignment']['statistics']['box'][1] if 'box' in report['alignment']['statistics'] else STATS_BOX[1])
         self.assertGreater(box[0],750)
 
     def test_old_frame_sets_inherit_new_inset_templates_but_new_sets_require_them(self):
@@ -180,6 +181,6 @@ class ExtendedLayoutTests(unittest.TestCase):
             self.assertEqual(decorated.crop((1180,1920,1438,2014)).tobytes(),baseline.crop((1180,1920,1438,2014)).tobytes())
             walker,_=render(preview_card('planeswalker',loaded))
             plain_walker,_=render(preview_card('planeswalker',plain))
-            self.assertEqual(walker.crop((1220,1906,1442,2040)).tobytes(),plain_walker.crop((1220,1906,1442,2040)).tobytes())
+            self.assertEqual(walker.crop((1220,1930,1442,2064)).tobytes(),plain_walker.crop((1220,1930,1442,2064)).tobytes())
             asset.putpixel((20,20),(0,0,255,255));asset.save(root/'detail.png')
             with self.assertRaises(LayoutError):validate_set(loaded)
