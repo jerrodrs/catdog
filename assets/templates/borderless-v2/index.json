@@ -1,0 +1,376 @@
+{
+  "version": "bloomburrow-inspired-v2.3",
+  "dimensions": [
+    1500,
+    2100
+  ],
+  "templates": [
+    {
+      "id": "W-normal",
+      "file": "W-normal.png",
+      "colors": "W",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "W-legendary",
+      "file": "W-legendary.png",
+      "colors": "W",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "U-normal",
+      "file": "U-normal.png",
+      "colors": "U",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "U-legendary",
+      "file": "U-legendary.png",
+      "colors": "U",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "B-normal",
+      "file": "B-normal.png",
+      "colors": "B",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "B-legendary",
+      "file": "B-legendary.png",
+      "colors": "B",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "R-normal",
+      "file": "R-normal.png",
+      "colors": "R",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "R-legendary",
+      "file": "R-legendary.png",
+      "colors": "R",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "G-normal",
+      "file": "G-normal.png",
+      "colors": "G",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "G-legendary",
+      "file": "G-legendary.png",
+      "colors": "G",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "C-normal",
+      "file": "C-normal.png",
+      "colors": "C",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "C-legendary",
+      "file": "C-legendary.png",
+      "colors": "C",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "WU-normal",
+      "file": "WU-normal.png",
+      "colors": [
+        "W",
+        "U"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "WU-legendary",
+      "file": "WU-legendary.png",
+      "colors": [
+        "W",
+        "U"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "UB-normal",
+      "file": "UB-normal.png",
+      "colors": [
+        "U",
+        "B"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "UB-legendary",
+      "file": "UB-legendary.png",
+      "colors": [
+        "U",
+        "B"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "BR-normal",
+      "file": "BR-normal.png",
+      "colors": [
+        "B",
+        "R"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "BR-legendary",
+      "file": "BR-legendary.png",
+      "colors": [
+        "B",
+        "R"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "RG-normal",
+      "file": "RG-normal.png",
+      "colors": [
+        "R",
+        "G"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "RG-legendary",
+      "file": "RG-legendary.png",
+      "colors": [
+        "R",
+        "G"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "GW-normal",
+      "file": "GW-normal.png",
+      "colors": [
+        "G",
+        "W"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "GW-legendary",
+      "file": "GW-legendary.png",
+      "colors": [
+        "G",
+        "W"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "WB-normal",
+      "file": "WB-normal.png",
+      "colors": [
+        "W",
+        "B"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "WB-legendary",
+      "file": "WB-legendary.png",
+      "colors": [
+        "W",
+        "B"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "UR-normal",
+      "file": "UR-normal.png",
+      "colors": [
+        "U",
+        "R"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "UR-legendary",
+      "file": "UR-legendary.png",
+      "colors": [
+        "U",
+        "R"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "BG-normal",
+      "file": "BG-normal.png",
+      "colors": [
+        "B",
+        "G"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "BG-legendary",
+      "file": "BG-legendary.png",
+      "colors": [
+        "B",
+        "G"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "RW-normal",
+      "file": "RW-normal.png",
+      "colors": [
+        "R",
+        "W"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "RW-legendary",
+      "file": "RW-legendary.png",
+      "colors": [
+        "R",
+        "W"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "GU-normal",
+      "file": "GU-normal.png",
+      "colors": [
+        "G",
+        "U"
+      ],
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "GU-legendary",
+      "file": "GU-legendary.png",
+      "colors": [
+        "G",
+        "U"
+      ],
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "M-normal",
+      "file": "M-normal.png",
+      "colors": "M",
+      "legendary": false,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    },
+    {
+      "id": "M-legendary",
+      "file": "M-legendary.png",
+      "colors": "M",
+      "legendary": true,
+      "profile": "standard",
+      "alias": true,
+      "stats": true
+    }
+  ],
+  "note": "Base proofs include alias and stats. Production selects those components per card."
+}

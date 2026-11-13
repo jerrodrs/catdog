@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "status": { "type": "string", "enum": ["completed", "blocked"] },
+    "message": { "type": "string" },
+    "manifest_path": { "type": "string" }
+  },
+  "required": ["status", "message", "manifest_path"],
+  "additionalProperties": false
+}

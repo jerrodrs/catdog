@@ -1,0 +1,18 @@
+{
+  "generation_tool": "built-in image_gen",
+  "native_dimensions": [
+    1060,
+    1484
+  ],
+  "prepared_dimensions": [
+    1500,
+    2100
+  ],
+  "preparation": "Lanczos cover-resampling and centre crop; retained original source",
+  "source_sha256": "f5ec655c63ba82025d94c1b5ef9782dca086ccca0b29455bde3aa0f73ca04811",
+  "style_file": "card-style.txt",
+  "style_sha256": "650500fb3eb300c8062c014541b1f17ad297bcf8531728b624f5a7a609d6a27c",
+  "prompt": "008-skullclamp-v2.prompt.txt",
+  "initial_art": "008-skullclamp-v1.source.png",
+  "style_snapshot": "commander-test-current.style.txt"
+}

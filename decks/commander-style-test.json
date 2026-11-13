@@ -1,0 +1,226 @@
+{
+  "cards": [
+    {
+      "id": "002-rin-and-seri",
+      "name": "Rin and Seri, Inseparable",
+      "mana_cost": "{1}{R}{G}{W}",
+      "type_line": "Legendary Creature — Dog Cat",
+      "oracle_text": "Whenever you cast a Dog spell, create a 1/1 green Cat creature token.\nWhenever you cast a Cat spell, create a 1/1 white Dog creature token.\n{R}{G}{W}, {T}: Rin and Seri deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control.",
+      "power": "4",
+      "toughness": "4",
+      "colors": [
+        "R",
+        "G",
+        "W"
+      ],
+      "color_identity": [
+        "R",
+        "G",
+        "W"
+      ],
+      "rarity": "mythic",
+      "profile": "dense",
+      "flavor_text": "Together, no paw walks alone.",
+      "layout": "normal",
+      "art": "../art/002-rin-and-seri-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/002-rin-and-seri-v1.prompt.txt",
+      "source": {
+        "snapshot": "../data/002-rin-and-seri.verified.json",
+        "url": "https://mtg.wtf/card/m21/278/Rin-and-Seri-Inseparable",
+        "sources": [
+          "https://mtg.wtf/card/m21/278/Rin-and-Seri-Inseparable"
+        ],
+        "snapshot_sha256": "b369f508fdc127ad0172ae4cba18c021d7e168fae4639d7d8ed92ea201396521"
+      }
+    },
+    {
+      "id": "003-selfless-savior",
+      "name": "Selfless Savior",
+      "mana_cost": "{W}",
+      "type_line": "Creature — Dog",
+      "oracle_text": "Sacrifice this creature: Another target creature you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+      "power": "1",
+      "toughness": "1",
+      "colors": [
+        "W"
+      ],
+      "color_identity": [
+        "W"
+      ],
+      "rarity": "uncommon",
+      "flavor_text": "He never asked who needed saving, only whether he could reach them.",
+      "layout": "normal",
+      "art": "../art/003-selfless-savior-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/003-selfless-savior-v1.prompt.txt",
+      "source": {
+        "snapshot": "../data/003-selfless-savior.verified.json",
+        "url": "https://mtg.wtf/card/m21/36/Selfless-Savior",
+        "sources": [
+          "https://mtg.wtf/card/m21/36/Selfless-Savior",
+          "https://magicmeta.net/cards/selfless-savior"
+        ],
+        "snapshot_sha256": "edfa6b8523163dd056e599583cfb90bb6303c3d98349668bcf01070423e85722"
+      }
+    },
+    {
+      "id": "004-universal-automaton",
+      "name": "Universal Automaton",
+      "display_name": "Manyshape Familiar",
+      "mana_cost": "{1}",
+      "type_line": "Artifact Creature — Shapeshifter",
+      "oracle_text": "Changeling (This card is every creature type.)",
+      "power": "1",
+      "toughness": "1",
+      "colors": [],
+      "color_identity": [],
+      "rarity": "common",
+      "flavor_text": "It learned to belong long before it learned to choose a shape.",
+      "layout": "normal",
+      "art": "../art/004-universal-automaton-v2.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/004-universal-automaton-v2.prompt.txt",
+      "source": {
+        "snapshot": "../data/004-universal-automaton.verified.json",
+        "url": "https://mtg.wtf/card/mh1/235/Universal-Automaton",
+        "sources": [
+          "https://mtg.wtf/card/mh1/235/Universal-Automaton",
+          "https://magic.wizards.com/en/news/feature/modern-horizons-release-notes-2019-05-31"
+        ],
+        "snapshot_sha256": "f7f2a8a0ac8e2e0309d500f8b0758f45458947197b0ad6cf46e3f87d98bf661f"
+      }
+    },
+    {
+      "id": "005-arahbo",
+      "name": "Arahbo, the First Fang",
+      "mana_cost": "{2}{W}",
+      "type_line": "Legendary Creature — Cat Avatar",
+      "oracle_text": "Other Cats you control get +1/+1.\nWhenever Arahbo or another nontoken Cat you control enters, create a 1/1 white Cat creature token.",
+      "power": "2",
+      "toughness": "2",
+      "colors": [
+        "W"
+      ],
+      "color_identity": [
+        "W"
+      ],
+      "rarity": "rare",
+      "flavor_text": "Every small paw carries the courage of the first.",
+      "layout": "normal",
+      "art": "../art/005-arahbo-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/005-arahbo-v1.prompt.txt",
+      "source": {
+        "snapshot": "../data/005-arahbo.verified.json",
+        "url": "https://www.mtg.wtf/card/fdn/2/Arahbo-the-First-Fang",
+        "sources": [
+          "https://www.mtg.wtf/card/fdn/2/Arahbo-the-First-Fang",
+          "https://magic.wizards.com/en/news/feature/foundations-release-notes"
+        ],
+        "snapshot_sha256": "fb663110da986b194f52e89f36bbc115f90e849847ba56ae5fbc94e6f53d405e"
+      }
+    },
+    {
+      "id": "006-jaheira",
+      "name": "Jaheira, Friend of the Forest",
+      "display_name": "Willow, Grove Guardian",
+      "mana_cost": "{2}{G}",
+      "type_line": "Legendary Creature — Human Elf Druid",
+      "oracle_text": "Tokens you control have \"{T}: Add {G}.\"\nChoose a Background (You can have a Background as a second commander.)",
+      "power": "2",
+      "toughness": "3",
+      "colors": [
+        "G"
+      ],
+      "color_identity": [
+        "G"
+      ],
+      "rarity": "rare",
+      "flavor_text": "In her company, even the smallest wonders learn to grow.",
+      "layout": "normal",
+      "art": "../art/006-jaheira-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/006-jaheira-v1.prompt.txt",
+      "source": {
+        "snapshot": "../data/006-jaheira.verified.json",
+        "url": "https://mtg.wtf/card/clb/237/Jaheira-Friend-of-the-Forest",
+        "sources": [
+          "https://mtg.wtf/card/clb/237/Jaheira-Friend-of-the-Forest",
+          "https://media.wizards.com/2022/downloads/CLB_Release_Notes/EN_MTGCLB_ReleaseNotes_04282022.pdf"
+        ],
+        "snapshot_sha256": "d92792ec92bb53ae03e37c3451d2d0fae67d8c9a3c270497cdae6f5492955982"
+      }
+    },
+    {
+      "id": "007-sol-ring",
+      "name": "Sol Ring",
+      "display_name": "Sunbeam Collar",
+      "mana_cost": "{1}",
+      "type_line": "Artifact",
+      "oracle_text": "{T}: Add {C}{C}.",
+      "colors": [],
+      "color_identity": [],
+      "rarity": "uncommon",
+      "flavor_text": "A little borrowed sunlight warms the longest road.",
+      "layout": "normal",
+      "art": "../art/007-sol-ring-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/007-sol-ring-v1.prompt.txt",
+      "source": {
+        "snapshot": "../data/007-sol-ring.verified.json",
+        "url": "https://mtg.wtf/card/c21/263/Sol-Ring",
+        "sources": [
+          "https://mtg.wtf/card/c21/263/Sol-Ring",
+          "https://manatrove.app/cards/znc/120"
+        ],
+        "snapshot_sha256": "5dae2cd7ab122bb956575279a2ae430372449504cc558adae1fbe73e7d6eb7ec"
+      }
+    },
+    {
+      "id": "008-skullclamp",
+      "name": "Skullclamp",
+      "display_name": "Keepsake Clasp",
+      "mana_cost": "{1}",
+      "type_line": "Artifact — Equipment",
+      "oracle_text": "Equipped creature gets +1/-1.\nWhenever equipped creature dies, draw two cards.\nEquip {1}",
+      "colors": [],
+      "color_identity": [],
+      "rarity": "uncommon",
+      "flavor_text": "A faithful heart leaves more than silence behind.",
+      "layout": "normal",
+      "art": "../art/008-skullclamp-v2.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "art_prompt": "../art/008-skullclamp-v2.prompt.txt",
+      "source": {
+        "snapshot": "../data/008-skullclamp.verified.json",
+        "url": "https://mtg.wtf/card/c20/251/Skullclamp",
+        "sources": [
+          "https://mtg.wtf/card/c20/251/Skullclamp"
+        ],
+        "snapshot_sha256": "7a761181c4c7af8f9be5ca4652b1a8c8253ce3c3fd7500da6939ba6bf9118278"
+      }
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "001-delighted-halfling": {
+    "shot_distance": "medium",
+    "viewpoint": "eye_level",
+    "subject_position": "distributed",
+    "pose": [
+      "walking",
+      "turning"
+    ],
+    "action": [
+      "travelling"
+    ],
+    "setting": [
+      "village trail",
+      "flowers",
+      "bridge"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A corgi leads along a flower-lined village trail with a tabby companion, looking back toward the viewer."
+  },
+  "002-rin-and-seri": {
+    "shot_distance": "medium",
+    "viewpoint": "low_angle",
+    "subject_position": "distributed",
+    "pose": [
+      "standing",
+      "sitting"
+    ],
+    "action": [
+      "guarding"
+    ],
+    "setting": [
+      "meadow",
+      "village overlook"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A standing dog and seated black-and-white cat lead a group overlooking a pastoral village."
+  },
+  "003-selfless-savior": {
+    "shot_distance": "medium",
+    "viewpoint": "ground_level",
+    "subject_position": "center",
+    "pose": [
+      "standing",
+      "braced"
+    ],
+    "action": [
+      "protecting"
+    ],
+    "setting": [
+      "woodland",
+      "fallen branch"
+    ],
+    "lighting": [
+      "dappled daylight"
+    ],
+    "summary": "A small terrier braces in front of a sheltered kitten beneath a fallen tree limb."
+  },
+  "004-universal-automaton": {
+    "shot_distance": "medium",
+    "viewpoint": "eye_level",
+    "subject_position": "center",
+    "pose": [
+      "standing"
+    ],
+    "action": [
+      "being inspected"
+    ],
+    "setting": [
+      "workshop",
+      "workbench"
+    ],
+    "lighting": [
+      "warm interior light"
+    ],
+    "summary": "A small brass mechanical companion stands on a workbench between a curious cat and dog."
+  },
+  "005-arahbo": {
+    "shot_distance": "medium",
+    "viewpoint": "low_angle",
+    "subject_position": "center",
+    "pose": [
+      "sitting upright"
+    ],
+    "action": [
+      "watching"
+    ],
+    "setting": [
+      "forest clearing",
+      "stone ruins"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A tall long-haired cat sits upright above smaller companions near forest ruins."
+  },
+  "006-jaheira": {
+    "shot_distance": "medium",
+    "viewpoint": "eye_level",
+    "subject_position": "left",
+    "pose": [
+      "reaching"
+    ],
+    "action": [
+      "observing"
+    ],
+    "setting": [
+      "garden",
+      "foliage"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A tabby on the left leans toward the right and extends a front paw among tiny leafy creatures."
+  },
+  "007-sol-ring": {
+    "shot_distance": "close",
+    "viewpoint": "eye_level",
+    "subject_position": "left",
+    "pose": [
+      "reaching"
+    ],
+    "action": [
+      "observing"
+    ],
+    "setting": [
+      "garden",
+      "stone path"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A tabby on the left leans toward a collar on a garden path with its front paw extended; a dog rests behind."
+  },
+  "008-skullclamp": {
+    "shot_distance": "close",
+    "viewpoint": "eye_level",
+    "subject_position": "left",
+    "pose": [
+      "reaching"
+    ],
+    "action": [
+      "observing"
+    ],
+    "setting": [
+      "cottage interior",
+      "tabletop"
+    ],
+    "lighting": [
+      "warm daylight"
+    ],
+    "summary": "A dark cat on the left leans toward the right with a front paw extended beside an ornate collar on a cloth-covered table."
+  }
+}

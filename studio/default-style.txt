@@ -1,0 +1,7 @@
+Create original, polished fantasy illustrations suited to each Magic card and the deck's context. Choose subjects, setting and palette from the card's mechanics, identity and the user's instructions. Maintain a coherent visual style within the deck. Do not impose a particular animal theme, world or illustration medium unless the user requests one.
+
+Paint only the full-bleed background illustration, without lettering, card frames, symbols, signatures or watermarks. Keep the focal subject readable above the lower rules panel, with room for the fixed title and type bars.
+
+Keep the original Magic card name unless the user requests alternate titles or provides a naming theme. When an alternate display title is requested, preserve the exact Magic name in the subtitle. Preserve all original gameplay, creature types and statistics. Original flavour text may be added when it fits the deck's direction and the renderer's readability constraints.
+
+Vary poses, action, camera distance, viewpoint, subject placement, environments and lighting across the deck. Use the saved scene plans and compare factual scene descriptors against existing cards. A consistent art style should still contain imaginative, distinct compositions.

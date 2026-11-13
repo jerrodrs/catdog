@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "name": "Edging and Gooning",
+  "description": "Borderless crystal-channel filigree: engraved gold rails, deep teal and sapphire facets, tightly wound gold coils and turquoise meniscus drops. Pale sea-glass information panels preserve bundled Magic typography. Artwork remains transparent; ornaments live outside protected information areas.",
+  "style": {
+    "shape": "angular",
+    "border_mode": "borderless",
+    "rules_sizing": "full",
+    "legendary_style": "crest",
+    "text_color": "#102E38",
+    "rail_width": 22,
+    "rail_color": "#B58B38",
+    "rail_highlight": "#FFF0B3",
+    "rail_shadow": "#49351D",
+    "rail_finish": "engraved",
+    "panel_color": "#D7EEE7",
+    "panel_alpha": 245
+  },
+  "palettes": {
+    "W": {
+      "rim": "#E5CF83",
+      "highlight": "#FFF6D2",
+      "shadow": "#55502C",
+      "header": "#EEE8CD"
+    },
+    "U": {
+      "rim": "#3C91DF",
+      "highlight": "#B3F0FF",
+      "shadow": "#102D68",
+      "header": "#BFDBF0"
+    },
+    "B": {
+      "rim": "#8E83B5",
+      "highlight": "#DCD7F2",
+      "shadow": "#292345",
+      "header": "#D7D0E4"
+    },
+    "R": {
+      "rim": "#D77B60",
+      "highlight": "#FFE1BB",
+      "shadow": "#66332D",
+      "header": "#F1D2BB"
+    },
+    "G": {
+      "rim": "#399D85",
+      "highlight": "#C0F7D5",
+      "shadow": "#134C41",
+      "header": "#CBE6CB"
+    },
+    "C": {
+      "rim": "#91BBC4",
+      "highlight": "#EDF9F8",
+      "shadow": "#2A4A59",
+      "header": "#D9E7E7"
+    },
+    "M": {
+      "rim": "#D1AF4E",
+      "highlight": "#FFF3B8",
+      "shadow": "#60501D",
+      "header": "#EBDFB2"
+    }
+  },
+  "layouts": {
+    "creature": {},
+    "artifact": {},
+    "enchantment": {},
+    "instant": {},
+    "sorcery": {},
+    "land": {},
+    "planeswalker": {},
+    "token": {},
+    "transform_front": {},
+    "transform_back": {},
+    "adventure": {},
+    "prepare": {}
+  },
+  "ornaments": [],
+  "decorations": [
+    {
+      "image": "crystal-corner.png",
+      "box": [
+        22,
+        270,
+        260,
+        540
+      ],
+      "fit": "contain"
+    },
+    {
+      "image": "crystal-corner.png",
+      "box": [
+        1240,
+        270,
+        1478,
+        540
+      ],
+      "fit": "contain",
+      "mirror_x": true
+    },
+    {
+      "image": "drip-trim-v2.png",
+      "box": [
+        74,
+        1905,
+        1426,
+        2065
+      ],
+      "fit": "contain"
+    }
+  ]
+}

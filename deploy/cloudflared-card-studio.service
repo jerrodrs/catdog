@@ -1,0 +1,17 @@
+[Unit]
+Description=Cloudflare Tunnel for Card Studio
+Wants=network-online.target
+After=network-online.target card-studio.service
+
+[Service]
+Type=simple
+User=jseger
+Group=jseger
+ExecStart=/usr/local/bin/cloudflared tunnel --no-autoupdate run --token-file /home/jseger/.config/card-studio/server-tunnel-token
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

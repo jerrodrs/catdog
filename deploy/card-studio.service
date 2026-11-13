@@ -1,0 +1,20 @@
+[Unit]
+Description=Card Studio
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=jseger
+Group=jseger
+WorkingDirectory=/home/jseger/magic-cards/catdog
+EnvironmentFile=/home/jseger/.config/card-studio/server.env
+ExecStart=/usr/local/lib/card-studio-node/bin/node studio/server.mjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=90
+UMask=0077
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

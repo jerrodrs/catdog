@@ -1,0 +1,159 @@
+{
+  "schema_version": 3,
+  "name": "Example \u00b7 Classic printed",
+  "description": "Flavour level: classic. A restrained, printed-card look: coloured rims, dark title bars, light parchment rules and type panels with dark lettering. No motifs; the art carries the card.",
+  "style": {
+    "shape": "classic",
+    "border_mode": "bordered",
+    "rail_width": 10,
+    "rail_finish": "flat",
+    "panel_color": "#EFE5CF",
+    "panel_alpha": 248,
+    "title_text_color": "#F6EFDC",
+    "type_text_color": "#1C1813",
+    "rules_text_color": "#1C1813",
+    "type_texture": "parchment",
+    "rules_texture": "parchment",
+    "texture_strength": 0.35
+  },
+  "textures": {
+    "parchment": {
+      "image": "assets/parchment.png",
+      "tint": false
+    }
+  },
+  "palettes": {
+    "W": {
+      "rim": "#D9D0B4",
+      "highlight": "#FFF8E0",
+      "shadow": "#6E6648",
+      "header": "#5C5440"
+    },
+    "U": {
+      "rim": "#3E7FB5",
+      "highlight": "#BFE0F5",
+      "shadow": "#13304A",
+      "header": "#1D3F5E"
+    },
+    "B": {
+      "rim": "#5E5862",
+      "highlight": "#C9C0CC",
+      "shadow": "#1E1A21",
+      "header": "#2E2932"
+    },
+    "R": {
+      "rim": "#C4513A",
+      "highlight": "#F7C2A6",
+      "shadow": "#4C1A12",
+      "header": "#6E2619"
+    },
+    "G": {
+      "rim": "#3E8A55",
+      "highlight": "#BFE0B8",
+      "shadow": "#143820",
+      "header": "#1F4A2C"
+    },
+    "C": {
+      "rim": "#9EA7AB",
+      "highlight": "#E6ECEE",
+      "shadow": "#3B4347",
+      "header": "#4A5357"
+    },
+    "M": {
+      "rim": "#C9A74C",
+      "highlight": "#FBEAB0",
+      "shadow": "#5A4518",
+      "header": "#5E4A1E"
+    }
+  },
+  "layouts": {
+    "creature": {},
+    "artifact": {},
+    "enchantment": {},
+    "instant": {},
+    "sorcery": {},
+    "land": {},
+    "planeswalker": {},
+    "token": {},
+    "transform_front": {},
+    "transform_back": {},
+    "adventure": {},
+    "prepare": {},
+    "saga": {}
+  },
+  "ornaments": [],
+  "rarity_symbol": {
+    "name": "Shield",
+    "shapes": [
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            -0.82,
+            -0.9
+          ],
+          [
+            0.82,
+            -0.9
+          ],
+          [
+            0.82,
+            0.12
+          ],
+          [
+            0,
+            0.96
+          ],
+          [
+            -0.82,
+            0.12
+          ]
+        ]
+      },
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            -0.12,
+            -0.62
+          ],
+          [
+            0.12,
+            -0.62
+          ],
+          [
+            0.12,
+            0.5
+          ],
+          [
+            -0.12,
+            0.5
+          ]
+        ],
+        "cut": true
+      },
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            -0.55,
+            -0.2
+          ],
+          [
+            0.55,
+            -0.2
+          ],
+          [
+            0.55,
+            0.04
+          ],
+          [
+            -0.55,
+            0.04
+          ]
+        ],
+        "cut": true
+      }
+    ]
+  }
+}

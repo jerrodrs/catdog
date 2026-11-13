@@ -1,0 +1,19 @@
+{
+  "id": "007-sol-ring",
+  "name": "Sol Ring",
+  "mana_cost": "{1}",
+  "type_line": "Artifact",
+  "oracle_text": "{T}: Add {C}{C}.",
+  "colors": [],
+  "color_identity": [],
+  "rarity": "uncommon",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://mtg.wtf/card/c21/263/Sol-Ring",
+      "https://manatrove.app/cards/znc/120"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

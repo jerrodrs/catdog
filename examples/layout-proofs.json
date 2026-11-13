@@ -1,0 +1,55 @@
+{
+  "cards": [
+    {
+      "id": "01-alternate-title",
+      "name": "Template Guardian",
+      "display_name": "The Hearthkeeper",
+      "mana_cost": "{1}{R}{G}{W}",
+      "type_line": "Legendary Creature — Cat Dog",
+      "oracle_text": "Vigilance\nWhenever Template Guardian attacks, draw a card.",
+      "flavor_text": "Every home deserves a guardian.\n—The village keeper",
+      "colors": ["R", "G", "W"],
+      "power": "4",
+      "toughness": "4",
+      "collector_number": "001",
+      "art_credit": "Layout proof • fictional test card"
+    },
+    {
+      "id": "02-activated-ability",
+      "name": "Template Relic",
+      "mana_cost": "{2}",
+      "type_line": "Artifact",
+      "oracle_text": "{T}: Add {C}.\n{2}, {T}: You gain 2 life.",
+      "flavor_text": "A small light, faithfully tended.",
+      "colors": [],
+      "collector_number": "002",
+      "art_credit": "Layout proof • fictional test card"
+    },
+    {
+      "id": "03-land",
+      "name": "Template Sanctuary",
+      "display_name": "Home Beyond the Hills",
+      "mana_cost": "",
+      "type_line": "Land",
+      "oracle_text": "This land enters tapped.\n{T}: Add {R}, {G}, or {W}.",
+      "flavor_text": "All roads eventually lead back here.",
+      "colors": [],
+      "collector_number": "003",
+      "art_credit": "Layout proof • fictional test card"
+    },
+    {
+      "id": "04-dense-reminder",
+      "name": "Template Chronicler",
+      "display_name": "Keeper of Every Story",
+      "mana_cost": "{2}{W/U}{G}",
+      "type_line": "Creature — Cat Druid",
+      "oracle_text": "Vigilance\nWhen this creature enters, create a 1/1 white Dog creature token.\n{G}, {T}: Put a +1/+1 counter on target creature. Activate only as a sorcery.\nCycling {2} ({2}, Discard this card: Draw a card.)",
+      "colors": ["W", "U", "G"],
+      "power": "2",
+      "toughness": "4",
+      "profile": "dense",
+      "collector_number": "004",
+      "art_credit": "Layout proof • fictional test card"
+    }
+  ]
+}

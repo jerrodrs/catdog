@@ -1,0 +1,25 @@
+{
+  "id": "003-selfless-savior",
+  "name": "Selfless Savior",
+  "mana_cost": "{W}",
+  "type_line": "Creature — Dog",
+  "oracle_text": "Sacrifice this creature: Another target creature you control gains indestructible until end of turn. (Damage and effects that say \"destroy\" don't destroy it.)",
+  "power": "1",
+  "toughness": "1",
+  "colors": [
+    "W"
+  ],
+  "color_identity": [
+    "W"
+  ],
+  "rarity": "uncommon",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://mtg.wtf/card/m21/36/Selfless-Savior",
+      "https://magicmeta.net/cards/selfless-savior"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

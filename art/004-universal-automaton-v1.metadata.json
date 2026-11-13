@@ -1,0 +1,16 @@
+{
+  "generation_tool": "built-in image_gen",
+  "native_dimensions": [
+    1060,
+    1484
+  ],
+  "prepared_dimensions": [
+    1500,
+    2100
+  ],
+  "preparation": "Lanczos cover-resampling and centre crop; retained original source",
+  "source_sha256": "5baa8a65f66690f09f02de84ceedaf8783bf94939b0653570ea015f833ee13e4",
+  "style_file": "card-style.txt",
+  "style_sha256": "650500fb3eb300c8062c014541b1f17ad297bcf8531728b624f5a7a609d6a27c",
+  "prompt": "004-universal-automaton-v1.prompt.txt"
+}

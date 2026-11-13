@@ -1,0 +1,25 @@
+{
+  "id": "005-arahbo",
+  "name": "Arahbo, the First Fang",
+  "mana_cost": "{2}{W}",
+  "type_line": "Legendary Creature — Cat Avatar",
+  "oracle_text": "Other Cats you control get +1/+1.\nWhenever Arahbo or another nontoken Cat you control enters, create a 1/1 white Cat creature token.",
+  "power": "2",
+  "toughness": "2",
+  "colors": [
+    "W"
+  ],
+  "color_identity": [
+    "W"
+  ],
+  "rarity": "rare",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://www.mtg.wtf/card/fdn/2/Arahbo-the-First-Fang",
+      "https://magic.wizards.com/en/news/feature/foundations-release-notes"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

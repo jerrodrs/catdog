@@ -1,0 +1,14 @@
+{
+  "tool": "built-in imagegen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "file": "drip-trim.png",
+      "prompt": "Use case: stylized-concept. Asset type: premium fantasy trading-card frame decoration, isolated horizontal trim component on a genuinely transparent background. Generate a long very slender ornamental gold rail with translucent turquoise magical liquid gathering along its underside and falling in seven varied elegant natural teardrops. Deep teal and sapphire crystal channels inset in polished warm gold, tiny engraved detailing and realistic luminous refractions. The gold rail runs horizontally edge to edge with a subtle broad upward arch at the centre, gently lifting by about 3 percent of its total width; ends lower and nearly straight. Organic fluid surface tension, meniscus bulges, rounded drop bodies narrowing into hanging necks, small specular highlights; NO angular zigzag or polygon droplets. Detailed refined material rendering, coherent soft studio highlights, not flat clip art. Panoramic composition approximately 7:1 for the actual visible ornament, with fully transparent margins if needed to fit the canvas. One continuous rail only, the whole rail and all droplets visible without clipping. No card panels, no text, no numbers, no icons, no logos, no watermark, no scene, no background or fake checkerboard. The transparent centre and surrounding empty space must remain genuinely transparent. This is decorative nonsexual fantasy mana, no characters."
+    },
+    {
+      "file": "crystal-corner.png",
+      "prompt": "Use case: stylized-concept. Asset type: isolated premium fantasy trading-card upper-left corner decoration on a genuinely transparent background. One elegant narrow L-shaped corner ornament in warm engraved gold, deep sapphire and teal faceted crystal, tightly coiled gold filigree and a small natural translucent turquoise mana droplet. Main gold spine runs vertically near the left edge of this individual ornament and turns gently to the right along its top; an inset sapphire gem catches cool luminous refractions. Delicate curled gold wires follow the inner diagonal, with real depth, clear separation and refined tiny engraved detail. A tiny bulb of glossy turquoise magical liquid gathers naturally in a crystal channel, with smooth surface tension rather than geometric polygons. It must look like crafted luxurious fantasy metalwork with painterly material detail, not cheap vector clip art or a large jewel icon. Front view, no perspective distortion, whole component visible, no clipping, restrained narrow silhouette that leaves most of the image empty and transparent to the right. No text, no numbers, no mana symbols, no panels, no characters, no illustration scene, no logos, no watermark, no background or checkerboard. True alpha transparency. Gold/sapphire/teal palette must harmonize with a pale sea-glass card panel."
+    }
+  ]
+}

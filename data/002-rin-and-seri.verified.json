@@ -1,0 +1,28 @@
+{
+  "id": "002-rin-and-seri",
+  "name": "Rin and Seri, Inseparable",
+  "mana_cost": "{1}{R}{G}{W}",
+  "type_line": "Legendary Creature — Dog Cat",
+  "oracle_text": "Whenever you cast a Dog spell, create a 1/1 green Cat creature token.\nWhenever you cast a Cat spell, create a 1/1 white Dog creature token.\n{R}{G}{W}, {T}: Rin and Seri deals damage to any target equal to the number of Dogs you control. You gain life equal to the number of Cats you control.",
+  "power": "4",
+  "toughness": "4",
+  "colors": [
+    "R",
+    "G",
+    "W"
+  ],
+  "color_identity": [
+    "R",
+    "G",
+    "W"
+  ],
+  "rarity": "mythic",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://mtg.wtf/card/m21/278/Rin-and-Seri-Inseparable"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

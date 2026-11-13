@@ -1,0 +1,19 @@
+{
+  "name": "Delighted Halfling",
+  "mana_cost": "{G}",
+  "type_line": "Creature — Halfling Citizen",
+  "oracle_text": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell, and that spell can't be countered.",
+  "power": "1",
+  "toughness": "2",
+  "colors": ["G"],
+  "color_identity": ["G"],
+  "layout": "normal",
+  "rarity": "rare",
+  "verification": {
+    "date": "2026-10-29",
+    "primary_source": "https://media.wizards.com/2023/downloads/LTR_Release_Notes/EN_MTGLTR_ReleaseNotes_20230508.pdf",
+    "primary_source_page": 14,
+    "corroborating_source": "https://www.mtg.wtf/card/ltr/402/Delighted-Halfling",
+    "lookup_note": "Gatherer and Scryfall direct requests returned 403/unavailable. Card information transcribed from Wizards release notes and corroborated against indexed card listings; not a live Scryfall API response."
+  }
+}

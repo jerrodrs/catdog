@@ -1,0 +1,21 @@
+{
+  "id": "004-universal-automaton",
+  "name": "Universal Automaton",
+  "mana_cost": "{1}",
+  "type_line": "Artifact Creature — Shapeshifter",
+  "oracle_text": "Changeling (This card is every creature type.)",
+  "power": "1",
+  "toughness": "1",
+  "colors": [],
+  "color_identity": [],
+  "rarity": "common",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://mtg.wtf/card/mh1/235/Universal-Automaton",
+      "https://magic.wizards.com/en/news/feature/modern-horizons-release-notes-2019-05-31"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

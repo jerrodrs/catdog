@@ -1,0 +1,1 @@
+{"type":"object","additionalProperties":false,"required":["status","message","config_path"],"properties":{"status":{"type":"string","enum":["completed","blocked"]},"message":{"type":"string"},"config_path":{"type":"string"}}}

@@ -1,0 +1,52 @@
+[
+  {
+    "asset": "BelerenProxy-Bold.ttf",
+    "git_blob_sha": "c66ab3c1949dcd4ba2a08c7da2e240ff8dbe6687",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/BelerenProxy-Bold.ttf"
+  },
+  {
+    "asset": "PlantinMTProRg.TTF",
+    "git_blob_sha": "fe1283f79865410fc3c90b2ff117c46ea9582f27",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/PlantinMTProRg.TTF"
+  },
+  {
+    "asset": "PlantinMTProRgIt.TTF",
+    "git_blob_sha": "2e92e9f364f0cbf42eccaec95186caa9f1f8bb8f",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/PlantinMTProRgIt.TTF"
+  },
+  {
+    "asset": "PlantinMTProSemiBdIt.TTF",
+    "git_blob_sha": "5b116c3f6e7458dae5914bf6473ff58d677573ec",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/PlantinMTProSemiBdIt.TTF"
+  },
+  {
+    "asset": "Gotham-Medium.otf",
+    "git_blob_sha": "d0aa5b14e0ba0128279fcffaf81567620ccec069",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/Gotham-Medium.otf"
+  },
+  {
+    "asset": "Beleren Small Caps.ttf",
+    "git_blob_sha": "062f128138a945769c888bec10909be9340f201b",
+    "url": "https://github.com/Investigamer/Proxyshop/blob/main/fonts/Beleren%20Small%20Caps.ttf"
+  },
+  {
+    "asset": "mana.ttf",
+    "git_blob_sha": "f4a955aa3b0d63e82624240eb89ad86094fca1fd",
+    "url": "https://github.com/andrewgioia/mana/blob/master/fonts/mana.ttf"
+  },
+  {
+    "asset": "../mana.css",
+    "git_blob_sha": "0a744d6fb8dc13f6c879d8fcd25230558f0c70b4",
+    "url": "https://github.com/andrewgioia/mana/blob/master/css/mana.css"
+  },
+  {
+    "asset": "Beleren2016-Bold.ttf",
+    "git_blob_sha": "4c9e5a42e6ed7adc28445c7f8967033a1e0dcb91",
+    "url": "https://github.com/Saeris/typeface-beleren-bold/blob/master/Beleren2016-Bold.ttf"
+  },
+  {
+    "asset": "Beleren2016SmallCaps-Bold.ttf",
+    "git_blob_sha": "ed2dc2c75960120f765f8aa5c21b2c759df81655",
+    "url": "https://github.com/Saeris/typeface-beleren-bold/blob/master/Beleren2016SmallCaps-Bold.ttf"
+  }
+]

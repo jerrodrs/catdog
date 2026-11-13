@@ -1,0 +1,39 @@
+{
+  "cards": [
+    {
+      "id": "001-delighted-halfling",
+      "name": "Delighted Halfling",
+      "display_name": "Bright-Eyed Trailguide",
+      "mana_cost": "{G}",
+      "type_line": "Creature — Halfling Citizen",
+      "oracle_text": "{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a legendary spell, and that spell can't be countered.",
+      "flavor_text": "Every great journey begins with someone delighted to lead the way.",
+      "power": "1",
+      "toughness": "2",
+      "colors": [
+        "G"
+      ],
+      "color_identity": [
+        "G"
+      ],
+      "layout": "normal",
+      "rarity": "rare",
+      "profile": "standard",
+      "collector_number": "001",
+      "set_code": "CDG",
+      "art_credit": "AI-generated artwork",
+      "art": "../art/delighted-halfling-v1.png",
+      "art_focus": [
+        0.5,
+        0.5
+      ],
+      "source": {
+        "snapshot": "../data/delighted-halfling.verified.json",
+        "url": "https://media.wizards.com/2023/downloads/LTR_Release_Notes/EN_MTGLTR_ReleaseNotes_20230508.pdf",
+        "page": 14,
+        "snapshot_sha256": "59b1bd4d2373ef75047cd4f2141eb5314ce31473725d4c101e29ca666ed3ab38"
+      },
+      "art_prompt": "../art/delighted-halfling-v1.prompt.txt"
+    }
+  ]
+}

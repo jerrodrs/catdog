@@ -1,0 +1,217 @@
+{
+  "schema_version": 3,
+  "name": "Example \u00b7 Midnight observatory",
+  "description": "Flavour level: showcase. Pill bars with foil rails and pinstripes, brushed-metal title and type panels tinted per colour, and a constellation of star and moon motifs reaching into the artwork. A full showcase set would usually add painted transparent decorations too.",
+  "style": {
+    "shape": "pill",
+    "border_mode": "borderless",
+    "rail_width": 24,
+    "rail_style": "pinstripe",
+    "rail_finish": "foil",
+    "rail_color": "#8FA6C8",
+    "rail_highlight": "#F4F8FF",
+    "rail_shadow": "#1E2740",
+    "panel_color": "#0D1224",
+    "panel_alpha": 222,
+    "text_color": "#F2F5FF",
+    "title_texture": "brushed",
+    "stats_texture": "brushed",
+    "type_texture": "brushed",
+    "texture_strength": 0.4,
+    "title_skin": "starglass",
+    "type_skin": "starglass",
+    "stats_skin": "starglass",
+    "panel_corners": "rounded",
+    "panel_corner_size": 28
+  },
+  "textures": {
+    "brushed": {
+      "image": "assets/brushed.png",
+      "tint": true
+    }
+  },
+  "palettes": {
+    "W": {
+      "rim": "#E8E2CC",
+      "highlight": "#FFFBEA",
+      "shadow": "#5A5440",
+      "header": "#4A4536"
+    },
+    "U": {
+      "rim": "#6FA8E8",
+      "highlight": "#DDEEFF",
+      "shadow": "#0E2442",
+      "header": "#14304F"
+    },
+    "B": {
+      "rim": "#9C8FB8",
+      "highlight": "#E6E0F2",
+      "shadow": "#1F1A30",
+      "header": "#2A2340"
+    },
+    "R": {
+      "rim": "#E8786A",
+      "highlight": "#FFD9D2",
+      "shadow": "#4A1714",
+      "header": "#5C1E1A"
+    },
+    "G": {
+      "rim": "#6CC4A0",
+      "highlight": "#D6F6EA",
+      "shadow": "#0E3628",
+      "header": "#144233"
+    },
+    "C": {
+      "rim": "#AEB8C8",
+      "highlight": "#EEF2F8",
+      "shadow": "#333B4A",
+      "header": "#3A4352"
+    },
+    "M": {
+      "rim": "#E6C66E",
+      "highlight": "#FFF2C6",
+      "shadow": "#4E3C12",
+      "header": "#4F3E14"
+    }
+  },
+  "layouts": {
+    "creature": {},
+    "artifact": {},
+    "enchantment": {},
+    "instant": {},
+    "sorcery": {},
+    "land": {},
+    "planeswalker": {},
+    "token": {},
+    "transform_front": {},
+    "transform_back": {},
+    "adventure": {},
+    "prepare": {},
+    "saga": {}
+  },
+  "ornaments": [
+    {
+      "kind": "line",
+      "points": [
+        [
+          520,
+          54
+        ],
+        [
+          600,
+          40
+        ],
+        [
+          750,
+          34
+        ],
+        [
+          900,
+          40
+        ],
+        [
+          980,
+          54
+        ]
+      ],
+      "tint": "highlight",
+      "width": 3
+    },
+    {
+      "kind": "line",
+      "points": [
+        [
+          580,
+          54
+        ],
+        [
+          650,
+          46
+        ],
+        [
+          750,
+          42
+        ],
+        [
+          850,
+          46
+        ],
+        [
+          920,
+          54
+        ]
+      ],
+      "tint": "highlight",
+      "width": 2,
+      "opacity": 0.7
+    },
+    {
+      "kind": "ellipse",
+      "points": [
+        [
+          36,
+          88
+        ],
+        [
+          80,
+          152
+        ]
+      ],
+      "fill_tint": "shadow",
+      "tint": "highlight",
+      "width": 3
+    },
+    {
+      "kind": "ellipse",
+      "points": [
+        [
+          1420,
+          88
+        ],
+        [
+          1464,
+          152
+        ]
+      ],
+      "fill_tint": "shadow",
+      "tint": "highlight",
+      "width": 3
+    }
+  ],
+  "rarity_symbol": {
+    "name": "Crescent and star",
+    "shapes": [
+      {
+        "shape": "symbol",
+        "symbol": "moon",
+        "center": [
+          -0.12,
+          0.05
+        ],
+        "size": 1.9,
+        "rotation": -15
+      },
+      {
+        "shape": "symbol",
+        "symbol": "star",
+        "center": [
+          0.5,
+          -0.42
+        ],
+        "size": 0.85
+      }
+    ]
+  },
+  "skins": {
+    "starglass": {
+      "image": "assets/starglass-skin.png",
+      "slice": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "fill": "tile"
+    }
+  }
+}

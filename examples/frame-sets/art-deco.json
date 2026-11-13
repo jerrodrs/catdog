@@ -1,0 +1,261 @@
+{
+  "schema_version": 3,
+  "name": "Example \u00b7 Art deco",
+  "description": "Flavour level: stylised. Stepped art-deco bars, double metallic rails, sunburst fans and sparkle motifs tinted by each card's palette.",
+  "style": {
+    "shape": "stepped",
+    "shape_cut": 28,
+    "border_mode": "borderless",
+    "rail_width": 16,
+    "rail_style": "double",
+    "rail_finish": "metallic",
+    "rail_color": "#C9A54A",
+    "rail_highlight": "#FFF0B8",
+    "rail_shadow": "#4A3512",
+    "panel_color": "#14161C",
+    "panel_alpha": 226,
+    "text_color": "#F7EED8"
+  },
+  "palettes": {
+    "W": {
+      "rim": "#E3D6AE",
+      "highlight": "#FFF6D8",
+      "shadow": "#5C5232",
+      "header": "#4E4630"
+    },
+    "U": {
+      "rim": "#5AA0D0",
+      "highlight": "#D2ECFA",
+      "shadow": "#102C44",
+      "header": "#173A57"
+    },
+    "B": {
+      "rim": "#9A8CA6",
+      "highlight": "#E2D8EA",
+      "shadow": "#231B2B",
+      "header": "#30263A"
+    },
+    "R": {
+      "rim": "#E07050",
+      "highlight": "#FFD4BC",
+      "shadow": "#4E1A10",
+      "header": "#682417"
+    },
+    "G": {
+      "rim": "#5BB07C",
+      "highlight": "#D2F0D8",
+      "shadow": "#133A24",
+      "header": "#1B4A2F"
+    },
+    "C": {
+      "rim": "#B7C0C4",
+      "highlight": "#EEF3F4",
+      "shadow": "#3A4448",
+      "header": "#454F54"
+    },
+    "M": {
+      "rim": "#E2BE5C",
+      "highlight": "#FFF1BE",
+      "shadow": "#5C4414",
+      "header": "#5A4418"
+    }
+  },
+  "layouts": {
+    "creature": {},
+    "artifact": {},
+    "enchantment": {},
+    "instant": {},
+    "sorcery": {},
+    "land": {},
+    "planeswalker": {},
+    "token": {},
+    "transform_front": {},
+    "transform_back": {},
+    "adventure": {},
+    "prepare": {},
+    "saga": {}
+  },
+  "ornaments": [
+    {
+      "kind": "polygon",
+      "points": [
+        [
+          560,
+          54
+        ],
+        [
+          600,
+          34
+        ],
+        [
+          900,
+          34
+        ],
+        [
+          940,
+          54
+        ]
+      ],
+      "fill_tint": "rim",
+      "tint": "highlight",
+      "width": 3
+    },
+    {
+      "kind": "line",
+      "points": [
+        [
+          620,
+          44
+        ],
+        [
+          880,
+          44
+        ]
+      ],
+      "tint": "highlight",
+      "width": 2
+    },
+    {
+      "kind": "polygon",
+      "points": [
+        [
+          40,
+          92
+        ],
+        [
+          58,
+          74
+        ],
+        [
+          76,
+          92
+        ],
+        [
+          76,
+          148
+        ],
+        [
+          58,
+          166
+        ],
+        [
+          40,
+          148
+        ]
+      ],
+      "fill_tint": "rim",
+      "tint": "highlight",
+      "width": 3
+    },
+    {
+      "kind": "polygon",
+      "points": [
+        [
+          1460,
+          92
+        ],
+        [
+          1442,
+          74
+        ],
+        [
+          1424,
+          92
+        ],
+        [
+          1424,
+          148
+        ],
+        [
+          1442,
+          166
+        ],
+        [
+          1460,
+          148
+        ]
+      ],
+      "fill_tint": "rim",
+      "tint": "highlight",
+      "width": 3
+    }
+  ],
+  "rarity_symbol": {
+    "name": "Deco fan",
+    "shapes": [
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            0,
+            -1
+          ],
+          [
+            0.95,
+            0.15
+          ],
+          [
+            0.55,
+            0.15
+          ],
+          [
+            0.55,
+            0.85
+          ],
+          [
+            -0.55,
+            0.85
+          ],
+          [
+            -0.55,
+            0.15
+          ],
+          [
+            -0.95,
+            0.15
+          ]
+        ]
+      },
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            0,
+            -0.55
+          ],
+          [
+            0.42,
+            0.05
+          ],
+          [
+            -0.42,
+            0.05
+          ]
+        ],
+        "cut": true
+      },
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            -0.3,
+            0.3
+          ],
+          [
+            0.3,
+            0.3
+          ],
+          [
+            0.3,
+            0.62
+          ],
+          [
+            -0.3,
+            0.62
+          ]
+        ],
+        "cut": true
+      }
+    ]
+  }
+}

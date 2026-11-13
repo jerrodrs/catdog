@@ -1,0 +1,12 @@
+{
+  "name": "magic-card-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node studio/server.mjs",
+    "dev": "node --watch studio/server.mjs",
+    "test:studio": "node --test --test-isolation=none studio/tests/*.test.mjs"
+  }
+}

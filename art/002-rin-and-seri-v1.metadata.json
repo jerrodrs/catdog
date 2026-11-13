@@ -1,0 +1,17 @@
+{
+  "generation_tool": "built-in image_gen",
+  "native_dimensions": [
+    1064,
+    1479
+  ],
+  "prepared_dimensions": [
+    1500,
+    2100
+  ],
+  "preparation": "Lanczos cover-resampling and centre crop; retained original source",
+  "source_sha256": "6ce2fec557710b713270ad1a6b6ebacc26f382ba426ca64baf1e592e55d687e2",
+  "style_file": "card-style.txt",
+  "style_sha256": "650500fb3eb300c8062c014541b1f17ad297bcf8531728b624f5a7a609d6a27c",
+  "prompt": "002-rin-and-seri-v1.prompt.txt",
+  "style_snapshot": "commander-test-current.style.txt"
+}

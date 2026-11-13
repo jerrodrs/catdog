@@ -1,0 +1,217 @@
+You are creating a cohesive, cat-and-dog-themed Magic: The Gathering Commander deck with custom artwork.
+
+I will provide only the name of an existing Magic card. Your job is to research that card, develop an appropriate cat-and-dog interpretation, and generate a finished card image.
+
+The result must combine:
+• Original, painterly fantasy artwork.
+• A full-art, borderless presentation.
+• The familiar structure, typography, and readability of a normal modern Magic card.
+• Accurate gameplay information.
+• An appropriate alternate title when required.
+• Original flavour text.
+
+No reference images or additional card details will be supplied. Make the creative decisions yourself using the instructions below.
+
+1. RESEARCH THE CARD FIRST
+
+Before generating the image, look up the named card using Gatherer and/or Scryfall. Read its current English Oracle information.
+
+Retrieve and verify:
+• Exact original card name.
+• Mana cost, including whether the card has no mana cost.
+• Complete type line, including supertypes and subtypes.
+• Complete current rules text.
+• Power/toughness, loyalty, defence, or other relevant values.
+• Any special layout requirements, including multiple faces.
+
+Use the paper Commander version unless I explicitly request another version. If older printed wording differs from current Oracle wording, use the current Oracle wording.
+
+Research the card yourself before invoking image generation. Pass the verified information explicitly into the image-generation instructions.
+
+Preserve all gameplay information. In particular, preserve creature types even when the artwork depicts a cat or dog. Keep original card names unchanged within rules text, including self-references.
+
+Only ask for clarification if the card’s identity is genuinely ambiguous or its details cannot be verified. Never invent missing gameplay information.
+
+2. DECIDE WHETHER TO CREATE AN ALTERNATE TITLE
+
+Apply these naming rules:
+
+A. Lands:
+Always retain the original card name. This applies to basic and nonbasic lands.
+
+B. Cards already themed around cats or dogs:
+Retain the original card name if the card is already clearly feline or canine through its current creature type, established character, name, or central concept.
+
+C. All other nonland cards:
+Create a new cat-or-dog-themed alternate title. This includes creatures, artifacts, enchantments, instants, sorceries, and planeswalkers.
+
+Choose a concise, evocative title that connects naturally to the original card’s function and the new artwork. Favour believable fantasy names and occasional understated wordplay. Avoid repetitive pet puns across the deck.
+
+A generic support card does not count as already cat-or-dog-themed simply because it is useful in this deck.
+
+For renamed cards:
+• Put the custom alternate title in the normal main title position.
+• Put the exact original card name directly beneath it in a smaller, clearly legible secondary title bar.
+• Keep the mana cost in its normal position at the upper right.
+• Treat the alternate title as a cosmetic presentation choice; preserve the original card’s gameplay identity and rules.
+
+For cards retaining their original name, use a single normal title bar without a redundant subtitle.
+
+Illustrative naming example:
+Main title: Sunbeam Collar
+Secondary title: Sol Ring
+
+3. CREATE APPROPRIATE FLAVOUR TEXT
+
+Write original flavour text for every card, including lands and cards whose published versions have no flavour text.
+
+Make it relevant to both the illustrated scene and the card’s effect or identity. Aim for warmth, companionship, curiosity, courage, mischief, or understated humour, expressed in the voice of a fantasy world.
+
+Usually use one short sentence of approximately 8–20 words. For cards with extensive rules text, use a shorter line.
+
+Place the flavour text beneath the rules text, in italics, with the familiar subtle separator between rules and flavour.
+
+Reserve enough room for both complete rules text and the flavour line. Shorten the original flavour text and adjust the layout as needed without removing or paraphrasing abilities.
+
+Flavour text must read as storytelling, not as an additional game ability.
+
+4. ILLUSTRATION STYLE
+
+Create a slightly stylized woodland-fantasy illustration with the warmth, character, and storytelling sensibility of Magic’s Bloomburrow. Give it the tactile appearance of opaque gouache on lightly textured illustration board, with confident, visible brushwork and a deliberately handmade finish.
+
+The deck’s consistent visual signature should combine expressive animal silhouettes, softly angular fur shapes, warm earthy colours, cooler painted shadows, and occasional subtle brown contour marks.
+
+CHARACTER AND DRAWING
+
+Keep cats and dogs recognizable and anatomically believable while gently simplifying their forms. Allow modest exaggeration in ears, posture, silhouettes, and gestures to strengthen personality.
+
+Give each animal distinctive proportions, an individual expression, and small natural asymmetries. Let the drawing feel observed and interpreted by an illustrator. Preserve charm without oversized baby eyes or exaggerated cartoon proportions.
+
+Not every card needs both a cat and a dog. Include both or just one depending on the card its abilities type and theme.
+
+PAINT HANDLING
+
+Build forms with broad, economical brushstrokes. Keep the direction, shape, and occasional broken edge of each stroke visible.
+
+Use layered opaque colour, dry-brush marks, patches of uneven paint coverage, and small glimpses of warm underpainting. Let these marks describe the direction of fur, the planes of a face, the folds of fabric, or the shape of foliage.
+
+Paint fur as grouped tufts and interlocking colour shapes, using only a few individual hairs at important edges. Suggest grass, leaves, stone, and wood through expressive marks and simplified patterns.
+
+Vary colour subtly within the light and shadow areas while preserving clear, readable forms. Allow some painted passages to remain loose and spontaneous.
+
+DETAIL AND EDGES
+
+Concentrate precision around the eyes, muzzle, important paws, and objects essential to the scene. Use broader, simpler handling elsewhere.
+
+Vary the edges: a few crisp accents, some softly broken contours, and occasional edges that merge gently into the surroundings. Allow restrained traces of warm brown drawing to remain visible in selected places.
+
+Keep the overall illustration finished and intentional, with enough detail to tell its story clearly at card size. Preserve visible brush decisions instead of smoothing every passage to the same finish.
+
+COLOUR AND LIGHT
+
+Use a cohesive palette of cream, ochre, muted russet, moss green, dusty blue, warm grey, and natural coat colours, with a few richer accents appropriate to the card.
+
+Describe light through painted shapes, colour relationships, and selective highlights. Keep surfaces mostly matte, with restrained reflections and soft atmospheric depth.
+
+Vary the palette and lighting between scenes while maintaining the same brushwork and approach to colour.
+
+FINISH
+
+Aim for the character of a carefully composed fantasy book illustration: expressive, slightly rough in its paint handling, and rich in personality.
+
+Avoid photographic fur, uniformly sharp detail, glossy 3D shading, perfectly smooth gradients, excessive rim lighting, artificial bloom, and repeated tiny texture marks. Create texture through meaningful brushwork; avoid blanket grain, blur, distressing, or an applied “painting filter.”
+
+Apply this treatment to the illustration. Render card typography, mana symbols, and frame elements with clean print precision.
+5. MAKE THE SCENE EXPRESS THE CARD
+
+Develop an original scene that communicates the card’s identity or gameplay concept through the cat-and-dog theme.
+
+• Creatures: portray a distinctive animal character, relationship, or action suited to the card.
+• Artifacts: make the object visually central and connect it naturally to the animals or their world.
+• Instants and sorceries: show a meaningful action, magical event, or consequence.
+• Enchantments: depict an enduring atmosphere, blessing, protection, gathering, or other appropriate influence.
+• Lands: create evocative landscapes or locations, with cats, dogs, pawprints, resting places, or other subtle signs of their presence where appropriate.
+
+Vary breeds, coat patterns, settings, camera angles, and interactions. Each card should tell its own small story while clearly belonging to the same illustrated world.
+
+Keep important faces and essential action clear of the title and rules areas.
+
+6. FULL-ART BORDERLESS, WITH NORMAL MTG STRUCTURE
+
+Use the familiar standard modern Magic card layout, adapted to full-art borderless presentation.
+
+Create a flat, straight-on card image in portrait orientation, approximately 5:7.
+
+The artwork must extend continuously to all four outer edges and continue behind the internal card elements. Eliminate the exterior black border and blank margins.
+
+Preserve the recognizable internal structure:
+
+TOP:
+A conventional MTG title bar, with the card title on the left and the correct mana symbols on the right.
+
+SECONDARY TITLE:
+For renamed cards only, a narrow original-name bar immediately below the main title.
+
+MAIN ART AREA:
+Place the main subject and action in the upper and middle portion of the card. The painting itself continues beyond this area throughout the entire card.
+
+TYPE BAR:
+Use the familiar horizontal type bar beneath the main focal area, with the exact type line aligned normally.
+
+RULES PANEL:
+Use a clearly defined lower text panel with normal MTG proportions, padding, paragraph structure, and alignment. Give it a translucent or softly shaded background that allows the underlying artwork to remain visible while providing excellent text contrast.
+
+FLAVOUR TEXT:
+Place the italic flavour line below the rules, separated by a subtle horizontal divider.
+
+STATS:
+Place power/toughness in the familiar bottom-right badge when applicable. Use the appropriate loyalty, defence, or other layout elements only when the researched card requires them.
+
+Maintain normal Magic spacing, hierarchy, alignment, and frame shapes. Thin outlines around internal title bars, type bars, and text panels are appropriate.
+
+Use restrained frame accents suited to the card’s colours and identity. Keep the overall structure consistent throughout the deck.
+
+“Borderless” describes the outer edge of the card. Retain the recognizable title bar, type bar, text panel, and applicable stat badge.
+
+For cards with special layouts or multiple faces, preserve their required structure and generate each necessary face separately.
+
+7. TYPOGRAPHY AND SYMBOLS
+
+Use the typography associated with normal modern Magic cards:
+
+• Main title: Beleren Bold.
+• Type line: Beleren Bold.
+• Power/toughness: Beleren Bold.
+• Rules text: Plantin, preferably Plantin MT Pro Regular.
+• Flavour text and reminder text: Plantin Italic.
+• Original-name subtitle on renamed cards: a smaller, clearly legible Plantin semibold italic treatment, consistent with MTG alternate-title cards.
+
+Match the characteristic letterforms, weight, spacing, and proportions. Keep rules text in normal sentence case and use authentic MTG paragraph formatting.
+
+Use correctly shaped Magic mana, tap, and other required symbols, positioned and sized appropriately. Render actual symbols on the finished card rather than literal placeholders such as “{G}” or the word “tap.”
+
+Use actual font files when the rendering workflow supports them. If the workflow only generates an approximation of the lettering, identify that limitation briefly in the accompanying response.
+
+Prioritize legibility at normal card size. Keep decorative effects away from text and symbols.
+
+8. VERIFY AND DELIVER
+
+Before delivery, inspect the rendered card against the researched specification.
+
+Check:
+• Correct card identity and naming treatment.
+• Correct mana cost and symbols.
+• Exact type line and complete rules text.
+• Correct applicable stats.
+• Original flavour text, visibly separated and italicized.
+• Legible lettering without missing or duplicated words.
+• Familiar MTG structure.
+• Artwork reaching every outer edge.
+
+Correct any detected errors.
+
+Generate the finished card image, rather than returning only a description or another prompt. Include a brief source note identifying the original card and the lookup source outside the image. Keep source URLs and citations off the card itself.
+
+Proceed with your chosen title, scene, and flavour text without asking me to approve routine creative decisions.
+
+CARD TO CREATE: [CARD NAME]

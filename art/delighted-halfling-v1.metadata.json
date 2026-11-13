@@ -1,0 +1,17 @@
+{
+  "generation_tool": "built-in image_gen",
+  "native_dimensions": [
+    1060,
+    1484
+  ],
+  "prepared_dimensions": [
+    1500,
+    2100
+  ],
+  "preparation": "Lanczos resampling for the 600 DPI composition master; not native 600 DPI detail",
+  "source_sha256": "cc97602861ec9f6a337131939ad30336ce8b9f67f24f9b4d75d858816da89a14",
+  "style_file": "card-style.txt",
+  "style_sha256": "2166a2d3bf751295eec7c4017012e8afc530c14c09b90b3e1d1e25592dd07ee6",
+  "initial_prompt": "delighted-halfling-v1.prompt.txt",
+  "selected_painting_edit": "delighted-halfling-v1.painting-edit.txt"
+}

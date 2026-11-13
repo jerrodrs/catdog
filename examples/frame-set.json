@@ -1,0 +1,107 @@
+{
+  "schema_version": 3,
+  "name": "Example Frame Set",
+  "description": "Copy this schema and design an original complete frame set. Fixed typography anchors preserve legibility.",
+  "style": {
+    "shape": "angular",
+    "text_color": "#f4eed8",
+    "rail_width": 10,
+    "panel_alpha": 210,
+    "panel_color": "#121d22"
+  },
+  "palettes": {
+    "W": {
+      "rim": "#d9cfaa",
+      "highlight": "#fff4d0",
+      "shadow": "#5a5138",
+      "header": "#686249"
+    },
+    "U": {
+      "rim": "#4f99c2",
+      "highlight": "#c6e8ef",
+      "shadow": "#132f4b",
+      "header": "#204b68"
+    },
+    "B": {
+      "rim": "#8c8494",
+      "highlight": "#ddd1de",
+      "shadow": "#292330",
+      "header": "#3b3442"
+    },
+    "R": {
+      "rim": "#e9684b",
+      "highlight": "#ffd3ad",
+      "shadow": "#54231d",
+      "header": "#842d23"
+    },
+    "G": {
+      "rim": "#32966b",
+      "highlight": "#bbd9b1",
+      "shadow": "#123c2a",
+      "header": "#20513a"
+    },
+    "C": {
+      "rim": "#a8b4ba",
+      "highlight": "#e5ecea",
+      "shadow": "#38464d",
+      "header": "#48565b"
+    },
+    "M": {
+      "rim": "#d4bb69",
+      "highlight": "#fff2ad",
+      "shadow": "#615024",
+      "header": "#756337"
+    }
+  },
+  "layouts": {
+    "creature": {},
+    "artifact": {},
+    "enchantment": {},
+    "instant": {},
+    "sorcery": {},
+    "land": {},
+    "planeswalker": {},
+    "token": {},
+    "transform_front": {},
+    "transform_back": {},
+    "adventure": {},
+    "prepare": {},
+    "saga": {}
+  },
+  "ornaments": [],
+  "rarity_symbol": {
+    "name": "Keystone",
+    "shapes": [
+      {
+        "shape": "polygon",
+        "points": [
+          [
+            -0.9,
+            -0.8
+          ],
+          [
+            0.9,
+            -0.8
+          ],
+          [
+            0.55,
+            0.9
+          ],
+          [
+            -0.55,
+            0.9
+          ]
+        ]
+      },
+      {
+        "shape": "circle",
+        "center": [
+          0,
+          -0.05
+        ],
+        "r": 0.32,
+        "cut": true
+      }
+    ]
+  }
+}

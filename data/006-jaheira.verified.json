@@ -1,0 +1,25 @@
+{
+  "id": "006-jaheira",
+  "name": "Jaheira, Friend of the Forest",
+  "mana_cost": "{2}{G}",
+  "type_line": "Legendary Creature — Human Elf Druid",
+  "oracle_text": "Tokens you control have \"{T}: Add {G}.\"\nChoose a Background (You can have a Background as a second commander.)",
+  "power": "2",
+  "toughness": "3",
+  "colors": [
+    "G"
+  ],
+  "color_identity": [
+    "G"
+  ],
+  "rarity": "rare",
+  "layout": "normal",
+  "verification": {
+    "date": "2026-10-29",
+    "sources": [
+      "https://mtg.wtf/card/clb/237/Jaheira-Friend-of-the-Forest",
+      "https://media.wizards.com/2022/downloads/CLB_Release_Notes/EN_MTGCLB_ReleaseNotes_04282022.pdf"
+    ],
+    "lookup_note": "Scryfall/Gatherer access unavailable; verified against current indexed card listings, with Wizards release-note corroboration for Arahbo, Jaheira and changeling reminder text. This is a manually transcribed verified snapshot, not a live API response."
+  }
+}

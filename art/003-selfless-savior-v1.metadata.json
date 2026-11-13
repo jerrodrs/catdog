@@ -1,0 +1,17 @@
+{
+  "generation_tool": "built-in image_gen",
+  "native_dimensions": [
+    1060,
+    1484
+  ],
+  "prepared_dimensions": [
+    1500,
+    2100
+  ],
+  "preparation": "Lanczos cover-resampling and centre crop; retained original source",
+  "source_sha256": "d06b21f131980e5d333978d147df893e51b69abc4653920ff6edcacf7be6aa03",
+  "style_file": "card-style.txt",
+  "style_sha256": "650500fb3eb300c8062c014541b1f17ad297bcf8531728b624f5a7a609d6a27c",
+  "prompt": "003-selfless-savior-v1.prompt.txt",
+  "style_snapshot": "commander-test-current.style.txt"
+}
